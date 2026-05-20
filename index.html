@@ -421,11 +421,12 @@
     /* ──────────────────────────────
        MODAL / OVERLAY
     ────────────────────────────── */
+    /* ── Modal backdrop ── */
     .modal-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(23, 23, 23, 0.5);
+      background: rgba(23, 23, 23, 0.5); /* --cg-bg-overlay */
       z-index: 100;
       align-items: center;
       justify-content: center;
@@ -433,11 +434,14 @@
 
     .modal-backdrop.open { display: flex; }
 
+    /* ── Modal container ──
+       radius-5x (20px) matches confirm-password modal from extended library */
     .modal {
+      position: relative;
       background: var(--cg-white);
-      border-radius: var(--cg-radius-3x);
+      border-radius: var(--cg-radius-5x);
       padding: var(--cg-space-6);
-      width: 384px;
+      width: 400px;
       box-shadow: var(--cg-shadow-modal);
       animation: modal-in var(--cg-dur-med) var(--cg-ease-standard);
     }
@@ -447,73 +451,129 @@
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
+    /* ── Close button — circular 32px, radius-full, top-right absolute ── */
+    .modal-close {
+      position: absolute;
+      top: var(--cg-space-4);
+      right: var(--cg-space-4);
+      width: 32px;
+      height: 32px;
+      border-radius: var(--cg-radius-full);
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--cg-fg-3);
+      transition: background var(--cg-dur-fast) var(--cg-ease-standard),
+                  color var(--cg-dur-fast) var(--cg-ease-standard);
+    }
+
+    .modal-close:hover {
+      background: var(--cg-gray-100);
+      color: var(--cg-fg-1);
+    }
+
+    .modal-close .ti { font-size: 18px; }
+
+    /* ── Icon wrap ── */
     .modal-icon-wrap {
-      width: 44px; height: 44px;
+      width: 48px;
+      height: 48px;
       background: var(--cg-primary-8);
       border-radius: var(--cg-radius-2x);
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: var(--cg-space-4);
     }
 
     .modal-icon-wrap .ti {
-      font-size: 22px;
+      font-size: 24px;
       color: var(--cg-primary);
     }
 
+    /* ── Title — weight-bold per modal heading convention ── */
     .modal-title {
-      font: var(--cg-h3-weight) var(--cg-h3-size)/var(--cg-h3-lh) var(--cg-font-sans);
+      font: 700 var(--cg-h3-size)/var(--cg-h3-lh) var(--cg-font-sans);
       color: var(--cg-fg-1);
       margin-bottom: var(--cg-space-2);
+      padding-right: var(--cg-space-6); /* clear the close button */
     }
 
+    /* ── Body ── */
     .modal-body {
       font: 400 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-body);
       color: var(--cg-fg-3);
-      margin-bottom: var(--cg-space-3);
+      margin-bottom: var(--cg-space-4);
     }
 
+    /* ── Best-for list ── */
     .modal-list {
       list-style: none;
-      margin-bottom: var(--cg-space-3);
+      margin-bottom: var(--cg-space-4);
     }
 
     .modal-list li {
       display: flex;
       align-items: flex-start;
       gap: var(--cg-space-2);
-      padding: 3px 0;
-      font: 400 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-body);
+      padding: var(--cg-space-1) 0;
+      font: 500 var(--cg-label-14-size)/var(--cg-label-14-lh) var(--cg-font-sans);
       color: var(--cg-fg-2);
     }
 
     .modal-list li .ti {
-      font-size: 15px;
+      font-size: 16px;
       color: var(--cg-primary);
-      margin-top: 3px;
+      margin-top: 2px;
       flex-shrink: 0;
     }
 
+    /* ── Info callout note — left-border accent, body-14 text ── */
     .modal-note {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--cg-space-3);
       background: var(--cg-primary-8);
-      border-radius: var(--cg-radius-1_5x);
+      border-left: 4px solid var(--cg-primary);
+      border-radius: 0 var(--cg-radius-1_5x) var(--cg-radius-1_5x) 0;
       padding: var(--cg-space-3) var(--cg-space-4);
-      font: 400 var(--cg-caption-12-size)/var(--cg-caption-12-lh) var(--cg-font-sans);
-      color: var(--cg-fg-3);
+      font: 400 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-body);
+      color: var(--cg-fg-2);
       margin-bottom: var(--cg-space-6);
     }
 
+    .modal-note .ti {
+      font-size: 16px;
+      color: var(--cg-primary);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── Divider ── */
+    .modal-divider {
+      height: 1px;
+      background: var(--cg-divider);
+      margin: 0 0 var(--cg-space-4);
+    }
+
+    /* ── Actions row — ghost left, primary right ── */
     .modal-actions {
       display: flex;
       align-items: center;
-      gap: var(--cg-space-3);
+      justify-content: space-between;
+      gap: var(--cg-space-2);
     }
 
+    /* btn-primary */
     .btn-primary {
-      flex: 1;
       height: 40px;
+      padding: 0 var(--cg-space-6);
       background: var(--cg-primary);
       color: #fff;
-      border: none;
+      border: 1px solid transparent;
       border-radius: var(--cg-radius-2x);
       font: 600 var(--cg-btn-m-size)/var(--cg-btn-m-lh) var(--cg-font-sans);
       cursor: pointer;
@@ -529,28 +589,31 @@
 
     .btn-primary:active { background: var(--cg-primary-active); }
 
-    .btn-back {
-      display: flex;
+    /* btn-ghost — bg transparent, border-default, text-body */
+    .btn-ghost {
+      display: inline-flex;
       align-items: center;
-      gap: var(--cg-space-1);
+      gap: var(--cg-space-2);
       height: 40px;
-      padding: 0 var(--cg-space-3);
-      font: 500 var(--cg-label-14-size)/var(--cg-label-14-lh) var(--cg-font-sans);
-      color: var(--cg-fg-3);
-      cursor: pointer;
-      background: none;
-      border: none;
+      padding: 0 var(--cg-space-4);
+      background: transparent;
+      color: var(--cg-fg-2);
+      border: 1px solid var(--cg-gray-200);
       border-radius: var(--cg-radius-2x);
+      font: 500 var(--cg-label-14-size)/var(--cg-label-14-lh) var(--cg-font-sans);
+      cursor: pointer;
       white-space: nowrap;
-      transition: color var(--cg-dur-fast), background var(--cg-dur-fast);
+      transition: background var(--cg-dur-fast) var(--cg-ease-standard),
+                  border-color var(--cg-dur-fast) var(--cg-ease-standard);
     }
 
-    .btn-back:hover {
-      color: var(--cg-primary);
-      background: var(--cg-primary-8);
+    .btn-ghost:hover {
+      background: var(--cg-gray-100);
+      border-color: var(--cg-gray-300);
     }
 
-    .btn-back .ti { font-size: 16px; }
+    .btn-ghost:active { background: var(--cg-gray-200); }
+    .btn-ghost .ti { font-size: 16px; }
   </style>
 </head>
 <body>
@@ -965,28 +1028,43 @@
 <div class="modal-backdrop" id="modalBackdrop">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
 
+    <!-- Close button -->
+    <button class="modal-close" id="btnClose" aria-label="Close">
+      <i class="ti ti-x"></i>
+    </button>
+
+    <!-- Icon -->
     <div class="modal-icon-wrap">
       <i class="ti ti-sparkles"></i>
     </div>
 
+    <!-- Title -->
     <h2 class="modal-title" id="modalTitle">Start without a knowledge base</h2>
 
+    <!-- Body -->
     <p class="modal-body">
       Your agent uses AI reasoning and tools only — no uploaded content required.
     </p>
 
+    <!-- Best-for list -->
     <ul class="modal-list">
       <li><i class="ti ti-check"></i> Workflow agents &amp; orchestration</li>
       <li><i class="ti ti-check"></i> Tool-calling and API integrations</li>
       <li><i class="ti ti-check"></i> Prompt-only assistants</li>
     </ul>
 
+    <!-- Info callout -->
     <div class="modal-note">
+      <i class="ti ti-info-circle"></i>
       You can connect a data source anytime from agent settings.
     </div>
 
+    <!-- Divider -->
+    <div class="modal-divider"></div>
+
+    <!-- Actions -->
     <div class="modal-actions">
-      <button class="btn-back" id="btnBack">
+      <button class="btn-ghost" id="btnBack">
         <i class="ti ti-arrow-left"></i>
         Back to sources
       </button>
@@ -997,19 +1075,24 @@
 </div>
 
 <script>
-  const card    = document.getElementById('noKbCard');
+  const card     = document.getElementById('noKbCard');
   const backdrop = document.getElementById('modalBackdrop');
-  const btnBack  = document.getElementById('btnBack');
+  const btnClose  = document.getElementById('btnClose');
+  const btnBack   = document.getElementById('btnBack');
   const btnCreate = document.getElementById('btnCreate');
 
-  card.addEventListener('click', () => backdrop.classList.add('open'));
-  btnBack.addEventListener('click', () => backdrop.classList.remove('open'));
-  backdrop.addEventListener('click', e => { if (e.target === backdrop) backdrop.classList.remove('open'); });
+  const openModal  = () => backdrop.classList.add('open');
+  const closeModal = () => backdrop.classList.remove('open');
+
+  card.addEventListener('click', openModal);
+  btnClose.addEventListener('click', closeModal);
+  btnBack.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
   btnCreate.addEventListener('click', () => {
-    backdrop.classList.remove('open');
+    closeModal();
     alert('→ Navigating to agent config — system prompt, tools, model');
   });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') backdrop.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
 
 </body>
