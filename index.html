@@ -3,549 +3,621 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create New Agent — Pick data source</title>
+  <meta name="color-scheme" content="light dark" />
+  <title>Create new agent — Pick data source</title>
+
+  <!-- CustomGPT.ai design tokens -->
+  <link rel="stylesheet" href="/Users/miodragristovski/Downloads/CustomGPT.ai Design System-2/colors_and_type.css">
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.29.0/dist/tabler-icons.min.css">
+
   <style>
+    /* ── HDR / Display P3 enhancement ── */
+    @media (color-gamut: p3) {
+      :root {
+        --cg-primary:        color(display-p3 0.45 0.40 0.94);
+        --cg-primary-hover:  color(display-p3 0.41 0.36 0.85);
+        --cg-primary-active: color(display-p3 0.36 0.32 0.75);
+        --cg-success-500:    color(display-p3 0.15 0.78 0.43);
+        --cg-warning-500:    color(display-p3 1.00 0.62 0.26);
+        --cg-danger-500:     color(display-p3 0.92 0.33 0.33);
+        --cg-info-500:       color(display-p3 0.00 0.81 0.91);
+      }
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f5f5f7;
-      color: #111;
       display: flex;
       min-height: 100vh;
+      background: var(--cg-bg-body);
+      font-family: var(--cg-font-sans);
+      color: var(--cg-fg-2);
     }
 
-    /* ── Sidebar ── */
+    /* ──────────────────────────────
+       SIDEBAR
+    ────────────────────────────── */
     .sidebar {
-      width: 200px;
-      min-width: 200px;
-      background: #fff;
-      border-right: 1px solid #e5e5e5;
+      width: 260px;
+      min-width: 260px;
+      background: var(--cg-white);
+      border-right: 1px solid var(--cg-divider);
       display: flex;
       flex-direction: column;
-      padding: 16px 0;
       position: fixed;
       top: 0; left: 0; bottom: 0;
-      z-index: 10;
+      z-index: 20;
     }
 
-    .sidebar-logo {
+    .sidebar-header {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 0 16px 16px;
-      font-weight: 700;
-      font-size: 14px;
-      color: #6c47ff;
-      border-bottom: 1px solid #f0f0f0;
+      gap: var(--cg-space-2);
+      height: 64px;
+      padding: 0 var(--cg-space-4);
+      border-bottom: 1px solid var(--cg-divider);
+      flex-shrink: 0;
     }
 
-    .sidebar-logo svg { flex-shrink: 0; }
+    .sidebar-logo-mark {
+      width: 28px; height: 28px;
+      flex-shrink: 0;
+    }
 
-    .sidebar-new-agent {
-      margin: 14px 12px;
-      background: #6c47ff;
+    .sidebar-logo-text {
+      font: 700 15px/20px var(--cg-font-sans);
+      color: var(--cg-fg-1);
+    }
+
+    .sidebar-toggle {
+      margin-left: auto;
+      font-size: 18px;
+      color: var(--cg-fg-4);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: var(--cg-space-1);
+      border-radius: var(--cg-radius-base);
+      transition: color var(--cg-dur-fast);
+    }
+
+    .sidebar-toggle:hover { color: var(--cg-fg-2); }
+
+    .sidebar-new-btn-wrap {
+      padding: var(--cg-space-4);
+      flex-shrink: 0;
+    }
+
+    .btn-new-agent {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--cg-space-2);
+      width: 100%;
+      height: 40px;
+      background: var(--cg-primary);
       color: #fff;
       border: none;
-      border-radius: 8px;
-      padding: 9px 14px;
-      font-size: 13px;
-      font-weight: 600;
+      border-radius: var(--cg-radius-2x);
+      font: 600 var(--cg-btn-m-size)/var(--cg-btn-m-lh) var(--cg-font-sans);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      width: calc(100% - 24px);
+      box-shadow: var(--cg-primary-shadow-default);
+      transition: background var(--cg-dur-fast) var(--cg-ease-standard),
+                  box-shadow var(--cg-dur-fast) var(--cg-ease-standard);
     }
 
-    .sidebar-new-agent:hover { background: #5c38e8; }
+    .btn-new-agent:hover {
+      background: var(--cg-primary-hover);
+      box-shadow: var(--cg-primary-shadow-lg);
+    }
 
-    .sidebar-nav { flex: 1; padding: 4px 0; }
+    .btn-new-agent:active { background: var(--cg-primary-active); }
+
+    .btn-new-agent .ti { font-size: 16px; }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: var(--cg-space-2) var(--cg-space-3);
+      overflow-y: auto;
+    }
 
     .nav-item {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 9px 16px;
-      font-size: 13px;
-      color: #555;
+      gap: var(--cg-space-3);
+      height: 40px;
+      padding: 0 var(--cg-space-3);
+      font: 500 var(--cg-label-14-size)/var(--cg-label-14-lh) var(--cg-font-sans);
+      color: var(--cg-fg-2);
       cursor: pointer;
-      border-radius: 6px;
-      margin: 1px 6px;
+      border-radius: var(--cg-radius-1_5x);
       text-decoration: none;
+      transition: background var(--cg-dur-fast) var(--cg-ease-standard),
+                  color var(--cg-dur-fast) var(--cg-ease-standard);
     }
 
-    .nav-item:hover { background: #f5f3ff; color: #6c47ff; }
-    .nav-item.active { background: #ede9ff; color: #6c47ff; font-weight: 600; }
+    .nav-item:hover { background: var(--cg-gray-hover-menu); }
 
-    .nav-item svg { flex-shrink: 0; opacity: 0.7; }
-    .nav-item.active svg { opacity: 1; }
+    .nav-item.active {
+      background: var(--cg-primary-8);
+      color: var(--cg-primary);
+      font-weight: 600;
+    }
+
+    .nav-item .ti {
+      font-size: 18px;
+      color: var(--cg-fg-3);
+      flex-shrink: 0;
+    }
+
+    .nav-item.active .ti { color: var(--cg-primary); }
 
     .notif-badge {
       margin-left: auto;
-      background: #ef4444;
+      background: var(--cg-danger-500);
       color: #fff;
-      font-size: 10px;
-      font-weight: 700;
-      border-radius: 9px;
-      padding: 1px 6px;
+      font: 700 10px/1 var(--cg-font-sans);
+      border-radius: var(--cg-radius-full);
+      padding: 3px 6px;
+      min-width: 18px;
+      text-align: center;
     }
 
     .sidebar-copilot {
-      padding: 12px;
-      border-top: 1px solid #f0f0f0;
+      padding: var(--cg-space-3) var(--cg-space-4);
+      border-top: 1px solid var(--cg-divider);
+      flex-shrink: 0;
     }
 
-    .sidebar-copilot-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: #888;
-      margin-bottom: 6px;
-      padding-left: 4px;
+    .copilot-label {
+      font: 600 var(--cg-overline-12-size)/var(--cg-overline-12-lh) var(--cg-font-sans);
+      color: var(--cg-fg-3);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: var(--cg-space-2);
     }
 
-    .sidebar-copilot-input {
+    .copilot-input {
       display: flex;
       align-items: center;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      padding: 7px 10px;
-      gap: 6px;
-      background: #fafafa;
+      gap: var(--cg-space-2);
+      height: 36px;
+      padding: 0 var(--cg-space-3);
+      border: 1px solid var(--cg-gray-200);
+      border-radius: var(--cg-radius-2x);
+      background: var(--cg-bg-body);
+      transition: border-color var(--cg-dur-fast);
     }
 
-    .sidebar-copilot-input input {
+    .copilot-input:focus-within { border-color: var(--cg-primary); }
+
+    .copilot-input input {
+      flex: 1;
       border: none;
       background: transparent;
-      font-size: 12px;
-      color: #888;
+      font: 400 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-body);
+      color: var(--cg-fg-2);
       outline: none;
-      flex: 1;
     }
 
+    .copilot-input input::placeholder { color: var(--cg-fg-4); }
+    .copilot-input .ti { font-size: 16px; color: var(--cg-fg-4); }
+
     .sidebar-footer {
-      padding: 8px 0;
-      border-top: 1px solid #f0f0f0;
+      padding: var(--cg-space-2) var(--cg-space-3);
+      border-top: 1px solid var(--cg-divider);
+      flex-shrink: 0;
     }
 
     .footer-item {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 9px 16px;
-      font-size: 13px;
-      color: #555;
+      gap: var(--cg-space-3);
+      height: 40px;
+      padding: 0 var(--cg-space-3);
+      font: 500 var(--cg-label-14-size)/var(--cg-label-14-lh) var(--cg-font-sans);
+      color: var(--cg-fg-2);
       cursor: pointer;
-      margin: 1px 6px;
-      border-radius: 6px;
+      border-radius: var(--cg-radius-1_5x);
+      transition: background var(--cg-dur-fast) var(--cg-ease-standard);
     }
 
-    .footer-item:hover { background: #f5f3ff; color: #6c47ff; }
-
-    .footer-item svg { flex-shrink: 0; }
-
-    .chevron { margin-left: auto; opacity: 0.4; }
+    .footer-item:hover { background: var(--cg-gray-hover-menu); }
+    .footer-item .ti { font-size: 18px; color: var(--cg-fg-3); flex-shrink: 0; }
+    .footer-item .ti-chevron-right { margin-left: auto; color: var(--cg-fg-4); font-size: 16px; }
 
     .avatar {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: #d1c4e9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      color: #6c47ff;
+      width: 28px; height: 28px;
+      border-radius: var(--cg-radius-full);
+      background: var(--cg-primary-8);
+      color: var(--cg-primary);
+      font: 700 11px/1 var(--cg-font-sans);
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
 
-    /* ── Main ── */
+    /* ──────────────────────────────
+       MAIN CONTENT
+    ────────────────────────────── */
     .main {
-      margin-left: 200px;
+      margin-left: 260px;
       flex: 1;
-      padding: 32px 36px 60px;
-      max-width: 900px;
+      padding: var(--cg-space-8) var(--cg-space-6) var(--cg-space-20);
     }
 
     .page-title {
-      font-size: 22px;
-      font-weight: 700;
-      color: #111;
-      margin-bottom: 18px;
+      font: var(--cg-h1-weight) var(--cg-h1-size)/var(--cg-h1-lh) var(--cg-font-sans);
+      color: var(--cg-fg-1);
+      margin-bottom: var(--cg-space-4);
     }
 
+    /* Search bar */
     .search-bar {
       display: flex;
       align-items: center;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      padding: 10px 14px;
-      gap: 8px;
-      background: #fff;
-      margin-bottom: 28px;
+      gap: var(--cg-space-3);
+      height: 40px;
+      padding: 0 var(--cg-space-4);
+      border: 1px solid var(--cg-gray-200);
+      border-radius: var(--cg-radius-2x);
+      background: var(--cg-white);
+      margin-bottom: var(--cg-space-8);
+      max-width: 760px;
+      transition: border-color var(--cg-dur-fast);
     }
+
+    .search-bar:focus-within { border-color: var(--cg-primary); }
 
     .search-bar input {
-      border: none;
-      outline: none;
-      font-size: 13px;
-      color: #aaa;
       flex: 1;
+      border: none;
       background: transparent;
+      font: 400 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-body);
+      color: var(--cg-fg-2);
+      outline: none;
     }
 
-    /* ── Section ── */
-    .section { margin-bottom: 32px; }
+    .search-bar input::placeholder { color: var(--cg-fg-4); }
+    .search-bar .ti-search { font-size: 18px; color: var(--cg-fg-4); flex-shrink: 0; }
+    .search-bar .ti-settings { font-size: 18px; color: var(--cg-fg-4); margin-left: auto; cursor: pointer; flex-shrink: 0; }
+    .search-bar .ti-settings:hover { color: var(--cg-fg-2); }
+
+    /* ── Sections ── */
+    .section { margin-bottom: var(--cg-space-8); }
 
     .section-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #111;
-      margin-bottom: 12px;
+      font: 600 var(--cg-h5-size)/var(--cg-h5-lh) var(--cg-font-sans);
+      color: var(--cg-fg-1);
+      margin-bottom: var(--cg-space-3);
     }
 
     .cards-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: var(--cg-space-2);
     }
 
-    /* ── Source Card ── */
+    /* ──────────────────────────────
+       SOURCE CARD
+    ────────────────────────────── */
     .card {
       position: relative;
-      width: 104px;
-      height: 104px;
-      background: #fff;
-      border: 1px solid #e8e8e8;
-      border-radius: 10px;
+      width: 100px;
+      height: 100px;
+      background: var(--cg-white);
+      border: 1px solid var(--cg-gray-200);
+      border-radius: var(--cg-radius-2x);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: var(--cg-space-2);
       cursor: pointer;
-      transition: border-color 0.15s, box-shadow 0.15s;
       overflow: hidden;
+      transition: border-color var(--cg-dur-fast) var(--cg-ease-standard),
+                  box-shadow var(--cg-dur-fast) var(--cg-ease-standard);
     }
 
     .card:hover {
-      border-color: #c4b5fd;
-      box-shadow: 0 2px 8px rgba(108, 71, 255, 0.1);
+      border-color: var(--cg-primary-300);
+      box-shadow: var(--cg-shadow-card);
     }
 
     .card-icon {
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
 
-    .card-icon img {
-      width: 38px;
-      height: 38px;
-      object-fit: contain;
+    /* Generic UI icons — brand purple */
+    .card-icon .ti {
+      font-size: 28px;
+      color: var(--cg-primary);
     }
 
     .card-label {
-      font-size: 11px;
-      font-weight: 500;
-      color: #333;
+      font: 500 var(--cg-label-12-size)/var(--cg-label-12-lh) var(--cg-font-sans);
+      color: var(--cg-fg-2);
       text-align: center;
-      line-height: 1.3;
-      padding: 0 4px;
+      padding: 0 var(--cg-space-1);
     }
 
-    /* Badge */
-    .badge {
+    /* Corner ribbon — Beta */
+    .ribbon {
       position: absolute;
       top: 0; left: 0;
-      width: 36px;
-      height: 36px;
       overflow: hidden;
+      width: 38px; height: 38px;
       pointer-events: none;
     }
 
-    .badge::before {
-      content: attr(data-label);
+    .ribbon::after {
+      content: "Beta";
       position: absolute;
-      top: 6px;
-      left: -10px;
+      top: 5px; left: -12px;
       width: 48px;
       text-align: center;
-      font-size: 8px;
-      font-weight: 700;
+      font: 700 7px/14px var(--cg-font-sans);
       color: #fff;
-      background: #6c47ff;
+      background: var(--cg-primary);
       transform: rotate(-45deg);
-      transform-origin: center;
-      line-height: 14px;
     }
 
     /* Lock icon */
-    .lock-icon {
+    .lock {
       position: absolute;
-      top: 6px; right: 7px;
-      color: #bbb;
+      top: var(--cg-space-2); right: var(--cg-space-2);
+      font-size: 13px;
+      color: var(--cg-fg-4);
     }
 
-    /* ── No Knowledge Base card — special ── */
+    /* ──────────────────────────────
+       NO KNOWLEDGE BASE CARD
+    ────────────────────────────── */
     .card-no-kb {
-      width: 104px;
-      height: 104px;
-      background: #fff;
-      border: 1.5px dashed #c4b5fd;
-      border-radius: 10px;
+      border: 1.5px dashed var(--cg-primary-300);
+      background: var(--cg-white);
     }
 
     .card-no-kb:hover {
-      border-color: #6c47ff;
-      background: #faf8ff;
-      box-shadow: 0 2px 10px rgba(108, 71, 255, 0.12);
+      border-color: var(--cg-primary);
+      background: var(--cg-primary-8);
+      box-shadow: var(--cg-primary-shadow-sm);
     }
 
     .card-no-kb .card-label {
-      font-size: 10.5px;
+      color: var(--cg-primary);
       font-weight: 600;
-      color: #6c47ff;
     }
 
-    .card-no-kb .new-badge {
+    .new-pill {
       position: absolute;
-      top: 0; right: 0;
-      background: #6c47ff;
+      top: var(--cg-space-2); right: var(--cg-space-2);
+      background: var(--cg-primary);
       color: #fff;
-      font-size: 8px;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-bottom-left-radius: 6px;
-      border-top-right-radius: 9px;
+      font: 700 9px/1 var(--cg-font-sans);
+      padding: 3px var(--cg-space-2);
+      border-radius: var(--cg-radius-full);
+      letter-spacing: 0.02em;
     }
 
-    /* ── Overlay ── */
-    .overlay-backdrop {
+    /* ──────────────────────────────
+       MODAL / OVERLAY
+    ────────────────────────────── */
+    .modal-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.35);
+      background: rgba(23, 23, 23, 0.5);
       z-index: 100;
       align-items: center;
       justify-content: center;
     }
 
-    .overlay-backdrop.open { display: flex; }
+    .modal-backdrop.open { display: flex; }
 
-    .overlay {
-      background: #fff;
-      border-radius: 14px;
-      padding: 28px 28px 24px;
-      width: 360px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.16);
-      animation: fadeUp 0.15s ease-out;
+    .modal {
+      background: var(--cg-white);
+      border-radius: var(--cg-radius-3x);
+      padding: var(--cg-space-6);
+      width: 384px;
+      box-shadow: var(--cg-shadow-modal);
+      animation: modal-in var(--cg-dur-med) var(--cg-ease-standard);
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(6px) scale(0.98); }
+    @keyframes modal-in {
+      from { opacity: 0; transform: translateY(8px) scale(0.97); }
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .overlay-icon {
-      width: 44px;
-      height: 44px;
-      background: #f0ebff;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 14px;
+    .modal-icon-wrap {
+      width: 44px; height: 44px;
+      background: var(--cg-primary-8);
+      border-radius: var(--cg-radius-2x);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: var(--cg-space-4);
     }
 
-    .overlay-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #111;
-      margin-bottom: 8px;
+    .modal-icon-wrap .ti {
+      font-size: 22px;
+      color: var(--cg-primary);
     }
 
-    .overlay-body {
-      font-size: 13px;
-      color: #555;
-      line-height: 1.55;
-      margin-bottom: 14px;
+    .modal-title {
+      font: var(--cg-h3-weight) var(--cg-h3-size)/var(--cg-h3-lh) var(--cg-font-sans);
+      color: var(--cg-fg-1);
+      margin-bottom: var(--cg-space-2);
     }
 
-    .overlay-list {
+    .modal-body {
+      font: 400 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-body);
+      color: var(--cg-fg-3);
+      margin-bottom: var(--cg-space-3);
+    }
+
+    .modal-list {
       list-style: none;
-      margin-bottom: 14px;
+      margin-bottom: var(--cg-space-3);
     }
 
-    .overlay-list li {
-      font-size: 13px;
-      color: #444;
-      padding: 3px 0;
+    .modal-list li {
       display: flex;
       align-items: flex-start;
-      gap: 7px;
-      line-height: 1.45;
+      gap: var(--cg-space-2);
+      padding: 3px 0;
+      font: 400 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-body);
+      color: var(--cg-fg-2);
     }
 
-    .overlay-list li::before {
-      content: "·";
-      color: #6c47ff;
-      font-weight: 900;
-      font-size: 16px;
-      line-height: 1.1;
+    .modal-list li .ti {
+      font-size: 15px;
+      color: var(--cg-primary);
+      margin-top: 3px;
       flex-shrink: 0;
     }
 
-    .overlay-note {
-      font-size: 12px;
-      color: #888;
-      margin-bottom: 20px;
-      padding: 10px 12px;
-      background: #f9f7ff;
-      border-radius: 7px;
-      border: 1px solid #ede9ff;
+    .modal-note {
+      background: var(--cg-primary-8);
+      border-radius: var(--cg-radius-1_5x);
+      padding: var(--cg-space-3) var(--cg-space-4);
+      font: 400 var(--cg-caption-12-size)/var(--cg-caption-12-lh) var(--cg-font-sans);
+      color: var(--cg-fg-3);
+      margin-bottom: var(--cg-space-6);
     }
 
-    .overlay-actions {
+    .modal-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: var(--cg-space-3);
     }
 
     .btn-primary {
       flex: 1;
-      background: #6c47ff;
+      height: 40px;
+      background: var(--cg-primary);
       color: #fff;
       border: none;
-      border-radius: 8px;
-      padding: 10px 16px;
-      font-size: 13px;
-      font-weight: 600;
+      border-radius: var(--cg-radius-2x);
+      font: 600 var(--cg-btn-m-size)/var(--cg-btn-m-lh) var(--cg-font-sans);
       cursor: pointer;
-      transition: background 0.15s;
+      box-shadow: var(--cg-primary-shadow-default);
+      transition: background var(--cg-dur-fast) var(--cg-ease-standard),
+                  box-shadow var(--cg-dur-fast) var(--cg-ease-standard);
     }
 
-    .btn-primary:hover { background: #5c38e8; }
+    .btn-primary:hover {
+      background: var(--cg-primary-hover);
+      box-shadow: var(--cg-primary-shadow-lg);
+    }
+
+    .btn-primary:active { background: var(--cg-primary-active); }
 
     .btn-back {
-      font-size: 13px;
-      color: #888;
+      display: flex;
+      align-items: center;
+      gap: var(--cg-space-1);
+      height: 40px;
+      padding: 0 var(--cg-space-3);
+      font: 500 var(--cg-label-14-size)/var(--cg-label-14-lh) var(--cg-font-sans);
+      color: var(--cg-fg-3);
       cursor: pointer;
       background: none;
       border: none;
-      padding: 4px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
+      border-radius: var(--cg-radius-2x);
       white-space: nowrap;
+      transition: color var(--cg-dur-fast), background var(--cg-dur-fast);
     }
 
-    .btn-back:hover { color: #6c47ff; }
+    .btn-back:hover {
+      color: var(--cg-primary);
+      background: var(--cg-primary-8);
+    }
+
+    .btn-back .ti { font-size: 16px; }
   </style>
 </head>
 <body>
 
-<!-- ── Sidebar ── -->
+<!-- ────────────────────────────────────────
+     SIDEBAR
+──────────────────────────────────────── -->
 <aside class="sidebar">
-  <div class="sidebar-logo">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <rect width="24" height="24" rx="6" fill="#6c47ff"/>
-      <path d="M7 12h10M12 7v10" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
-    </svg>
-    CustomGPT.ai
+
+  <div class="sidebar-header">
+    <img src="/Users/miodragristovski/Downloads/CustomGPT.ai Design System-2/assets/logo-48px.svg"
+         class="sidebar-logo-mark" alt="CustomGPT.ai" />
+    <span class="sidebar-logo-text">CustomGPT.ai</span>
+    <button class="sidebar-toggle" aria-label="Collapse sidebar">
+      <i class="ti ti-layout-sidebar-left-collapse"></i>
+    </button>
   </div>
 
-  <button class="sidebar-new-agent">
-    <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
-      <path d="M6 1v10M1 6h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-    New Agent
-  </button>
+  <div class="sidebar-new-btn-wrap">
+    <button class="btn-new-agent">
+      <i class="ti ti-plus"></i>
+      New Agent
+    </button>
+  </div>
 
   <nav class="sidebar-nav">
     <a class="nav-item" href="#">
-      <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-        <rect x="2" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
-        <rect x="11" y="2" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
-        <rect x="2" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
-        <rect x="11" y="11" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
-      </svg>
+      <i class="ti ti-layout-dashboard"></i>
       Dashboard
     </a>
     <a class="nav-item active" href="#">
-      <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-        <circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.6"/>
-        <path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
+      <i class="ti ti-robot"></i>
       Agents
     </a>
     <a class="nav-item" href="#">
-      <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-        <circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.6"/>
-        <circle cx="10" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/>
-      </svg>
+      <i class="ti ti-database"></i>
       Resources
     </a>
     <a class="nav-item" href="#">
-      <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-        <path d="M17 7.5C17 12.5 10 17.5 10 17.5S3 12.5 3 7.5a7 7 0 0114 0z" stroke="currentColor" stroke-width="1.6"/>
-      </svg>
+      <i class="ti ti-brand-slack"></i>
       Slack Community
     </a>
     <a class="nav-item" href="#">
-      <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-        <path d="M10 2a6 6 0 016 6c0 4-2 6-2 8H6c0-2-2-4-2-8a6 6 0 016-6z" stroke="currentColor" stroke-width="1.6"/>
-        <path d="M8 16h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
+      <i class="ti ti-bell"></i>
       Notifications
       <span class="notif-badge">3</span>
     </a>
   </nav>
 
   <div class="sidebar-copilot">
-    <div class="sidebar-copilot-label">CustomGPT.ai Copilot</div>
-    <div class="sidebar-copilot-input">
-      <input type="text" placeholder="I need help with..." />
-      <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
-        <path d="M17 10H3M17 10l-5-5M17 10l-5 5" stroke="#aaa" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+    <div class="copilot-label">CustomGPT.ai Copilot</div>
+    <div class="copilot-input">
+      <input type="text" placeholder="I need help with…" />
+      <i class="ti ti-send"></i>
     </div>
   </div>
 
   <div class="sidebar-footer">
     <div class="footer-item">
-      <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-        <circle cx="10" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/>
-        <path d="M3 17c0-3.31 3.13-6 7-6s7 2.69 7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
+      <i class="ti ti-code"></i>
       Developers
-      <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
-        <path d="M4.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <i class="ti ti-chevron-right"></i>
     </div>
     <div class="footer-item">
       <div class="avatar">M</div>
       My Account
-      <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none">
-        <path d="M4.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <i class="ti ti-chevron-right"></i>
     </div>
   </div>
+
 </aside>
 
-<!-- ── Main ── -->
+<!-- ────────────────────────────────────────
+     MAIN
+──────────────────────────────────────── -->
 <main class="main">
+
   <h1 class="page-title">Pick data source for your agent</h1>
 
   <div class="search-bar">
-    <svg width="15" height="15" viewBox="0 0 20 20" fill="none">
-      <circle cx="9" cy="9" r="6" stroke="#bbb" stroke-width="1.7"/>
-      <path d="M13.5 13.5L17 17" stroke="#bbb" stroke-width="1.7" stroke-linecap="round"/>
-    </svg>
-    <input type="text" placeholder="Placeholder" />
+    <i class="ti ti-search"></i>
+    <input type="text" placeholder="Find the source you need quickly" />
+    <i class="ti ti-settings"></i>
   </div>
 
   <!-- Most Popular -->
@@ -553,85 +625,51 @@
     <div class="section-title">Most Popular</div>
     <div class="cards-grid">
 
-      <!-- No Knowledge Base card — first position -->
+      <!-- No Knowledge Base — first -->
       <div class="card card-no-kb" id="noKbCard">
-        <span class="new-badge">New</span>
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <path d="M17 4L20.5 12H29L22.5 17.5L25 26L17 21L9 26L11.5 17.5L5 12H13.5L17 4Z" stroke="#6c47ff" stroke-width="1.7" stroke-linejoin="round" fill="none"/>
-            <circle cx="17" cy="17" r="3" fill="#6c47ff" opacity="0.18"/>
-          </svg>
-        </div>
-        <span class="card-label">No Knowledge Base</span>
+        <span class="new-pill">New</span>
+        <div class="card-icon"><i class="ti ti-sparkles"></i></div>
+        <span class="card-label">No knowledge base</span>
       </div>
 
       <div class="card">
-        <div class="card-icon">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <circle cx="18" cy="18" r="16" stroke="#6c47ff" stroke-width="1.8"/>
-            <circle cx="18" cy="18" r="8" stroke="#6c47ff" stroke-width="1.8"/>
-            <line x1="2" y1="18" x2="34" y2="18" stroke="#6c47ff" stroke-width="1.8"/>
-            <path d="M18 2c-4 5-6 10-6 16s2 11 6 16" stroke="#6c47ff" stroke-width="1.8"/>
-            <path d="M18 2c4 5 6 10 6 16s-2 11-6 16" stroke="#6c47ff" stroke-width="1.8"/>
-          </svg>
-        </div>
+        <div class="card-icon"><i class="ti ti-world"></i></div>
         <span class="card-label">Website</span>
       </div>
 
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="7" y="4" width="16" height="20" rx="2" stroke="#6c47ff" stroke-width="1.7"/>
-            <path d="M11 10h8M11 14h8M11 18h5" stroke="#6c47ff" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M20 22l4 4" stroke="#6c47ff" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="22" cy="26" r="4" stroke="#6c47ff" stroke-width="1.7"/>
-          </svg>
-        </div>
-        <span class="card-label">File Upload</span>
+        <div class="card-icon"><i class="ti ti-cloud-upload"></i></div>
+        <span class="card-label">File upload</span>
       </div>
 
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="11" cy="17" r="5" stroke="#6c47ff" stroke-width="1.7"/>
-            <circle cx="23" cy="10" r="5" stroke="#6c47ff" stroke-width="1.7"/>
-            <circle cx="23" cy="24" r="5" stroke="#6c47ff" stroke-width="1.7"/>
-            <line x1="15.5" y1="14.5" x2="18.5" y2="11.5" stroke="#6c47ff" stroke-width="1.5"/>
-            <line x1="15.5" y1="19.5" x2="18.5" y2="22.5" stroke="#6c47ff" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <span class="card-label">Multi Agent</span>
+        <div class="card-icon"><i class="ti ti-hierarchy-2"></i></div>
+        <span class="card-label">Multi agent</span>
       </div>
 
+      <!-- Zapier — brand SVG (no Tabler brand icon) -->
       <div class="card">
         <div class="card-icon">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <rect x="3" y="3" width="30" height="30" rx="8" fill="#FF4F11"/>
-            <path d="M10 18l3 3 3-3M22 15l-3-3-3 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="15" y="12" width="6" height="12" rx="1" fill="#fff"/>
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+            <rect x="2" y="2" width="30" height="30" rx="7" fill="#FF4A00"/>
+            <path d="M10 17l3.5 3.5L17 17l3.5 3.5L24 17M10 17l3.5-3.5L17 17l3.5-3.5L24 17" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <span class="card-label">Zapier</span>
       </div>
 
+      <!-- WordPress — brand icon -->
       <div class="card">
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="2" y="2" width="30" height="30" rx="5" fill="#21759B"/>
-            <path d="M5 17C5 10.37 10.37 5 17 5s12 5.37 12 12-5.37 12-12 12S5 23.63 5 17z" fill="#21759B"/>
-            <path d="M17 5c2.5 3 4 7.5 4 12s-1.5 9-4 12M17 5c-2.5 3-4 7.5-4 12s1.5 9 4 12M5 17h24" stroke="#fff" stroke-width="1.4"/>
-            <path d="M6 12h22M6 22h22" stroke="#fff" stroke-width="1.1"/>
-          </svg>
+          <i class="ti ti-brand-wordpress" style="font-size:28px;color:#21759B;"></i>
         </div>
         <span class="card-label">WordPress</span>
       </div>
 
+      <!-- YouTube — brand icon -->
       <div class="card">
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="2" y="6" width="30" height="22" rx="4" fill="#FF0000"/>
-            <polygon points="14,12 14,22 23,17" fill="#fff"/>
-          </svg>
+          <i class="ti ti-brand-youtube" style="font-size:28px;color:#FF0000;"></i>
         </div>
         <span class="card-label">YouTube</span>
       </div>
@@ -645,63 +683,41 @@
     <div class="cards-grid">
 
       <div class="card">
-        <div class="badge" data-label="Beta"></div>
+        <div class="ribbon"></div>
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <path d="M17 4L6 23h22L17 4z" fill="#4285F4"/>
-            <path d="M6 23l-4 7h15L6 23z" fill="#FBBC04"/>
-            <path d="M28 23l-11 7h15l-4-7z" fill="#34A853"/>
-          </svg>
+          <i class="ti ti-brand-google-drive" style="font-size:28px;color:#4285F4;"></i>
         </div>
         <span class="card-label">Google Drive</span>
       </div>
 
       <div class="card">
-        <div class="lock-icon">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <rect x="2" y="5.5" width="8" height="6" rx="1.2" stroke="#bbb" stroke-width="1.2"/>
-            <path d="M4 5.5V4a2 2 0 014 0v1.5" stroke="#bbb" stroke-width="1.2"/>
-          </svg>
-        </div>
+        <i class="ti ti-lock lock"></i>
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="4" y="4" width="26" height="26" rx="4" fill="#0061FE"/>
-            <path d="M9 22L17 8l8 14H9z" fill="#fff" opacity="0.9"/>
-            <path d="M5 26l8-14 4 7-4 7H5z" fill="#fff" opacity="0.7"/>
-          </svg>
+          <i class="ti ti-brand-dropbox" style="font-size:28px;color:#0061FE;"></i>
         </div>
         <span class="card-label">DropBox</span>
       </div>
 
       <div class="card">
-        <div class="badge" data-label="Beta"></div>
-        <div class="lock-icon">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <rect x="2" y="5.5" width="8" height="6" rx="1.2" stroke="#bbb" stroke-width="1.2"/>
-            <path d="M4 5.5V4a2 2 0 014 0v1.5" stroke="#bbb" stroke-width="1.2"/>
-          </svg>
-        </div>
+        <div class="ribbon"></div>
+        <i class="ti ti-lock lock"></i>
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="4" y="4" width="26" height="26" rx="4" fill="#036C70"/>
-            <text x="17" y="22" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">S</text>
+          <!-- SharePoint — S mark -->
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="6" fill="#036C70"/>
+            <text x="16" y="22" text-anchor="middle" font-size="16" font-weight="700" fill="#fff" font-family="Inter,sans-serif">S</text>
           </svg>
         </div>
         <span class="card-label">SharePoint Docs</span>
       </div>
 
       <div class="card">
-        <div class="badge" data-label="Beta"></div>
-        <div class="lock-icon">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <rect x="2" y="5.5" width="8" height="6" rx="1.2" stroke="#bbb" stroke-width="1.2"/>
-            <path d="M4 5.5V4a2 2 0 014 0v1.5" stroke="#bbb" stroke-width="1.2"/>
-          </svg>
-        </div>
+        <div class="ribbon"></div>
+        <i class="ti ti-lock lock"></i>
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="4" y="4" width="26" height="26" rx="4" fill="#0078D4"/>
-            <text x="17" y="22" text-anchor="middle" font-size="13" fill="#fff" font-weight="700">S</text>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="6" fill="#0078D4"/>
+            <text x="16" y="22" text-anchor="middle" font-size="16" font-weight="700" fill="#fff" font-family="Inter,sans-serif">S</text>
           </svg>
         </div>
         <span class="card-label">SharePoint Sites</span>
@@ -709,11 +725,7 @@
 
       <div class="card">
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <ellipse cx="17" cy="12" rx="10" ry="6" fill="#0078D4" opacity="0.15" stroke="#0078D4" stroke-width="1.6"/>
-            <path d="M7 12v10c0 3.31 4.48 6 10 6s10-2.69 10-6V12" stroke="#0078D4" stroke-width="1.6"/>
-            <ellipse cx="17" cy="12" rx="10" ry="6" stroke="#0078D4" stroke-width="1.6"/>
-          </svg>
+          <i class="ti ti-brand-onedrive" style="font-size:28px;color:#0078D4;"></i>
         </div>
         <span class="card-label">OneDrive</span>
       </div>
@@ -725,58 +737,32 @@
   <div class="section">
     <div class="section-title">Web</div>
     <div class="cards-grid">
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="17" r="13" stroke="#6c47ff" stroke-width="1.7"/>
-            <circle cx="17" cy="17" r="6" stroke="#6c47ff" stroke-width="1.7"/>
-            <line x1="4" y1="17" x2="30" y2="17" stroke="#6c47ff" stroke-width="1.7"/>
-            <path d="M17 4c-3 4-5 8-5 13s2 9 5 13" stroke="#6c47ff" stroke-width="1.7"/>
-            <path d="M17 4c3 4 5 8 5 13s-2 9-5 13" stroke="#6c47ff" stroke-width="1.7"/>
-          </svg>
-        </div>
+        <div class="card-icon"><i class="ti ti-world"></i></div>
         <span class="card-label">Website</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="4" y="7" width="18" height="22" rx="2" stroke="#6c47ff" stroke-width="1.7"/>
-            <path d="M8 13h10M8 17h10M8 21h6" stroke="#6c47ff" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M18 4h8v22" stroke="#6c47ff" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </div>
+        <div class="card-icon"><i class="ti ti-sitemap"></i></div>
         <span class="card-label">Sitemap</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="5" y="5" width="24" height="24" rx="3" stroke="#6c47ff" stroke-width="1.7"/>
-            <path d="M10 12h14M10 17h14M10 22h8" stroke="#6c47ff" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <span class="card-label">URL List</span>
+        <div class="card-icon"><i class="ti ti-list"></i></div>
+        <span class="card-label">URL list</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="17" r="13" stroke="#6c47ff" stroke-width="1.7"/>
-            <circle cx="17" cy="17" r="4" stroke="#6c47ff" stroke-width="1.7"/>
-            <path d="M22 12l5-5M12 22l-5 5M22 22l5 5M12 12l-5-5" stroke="#6c47ff" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <span class="card-label">Web Search</span>
+        <div class="card-icon"><i class="ti ti-search"></i></div>
+        <span class="card-label">Web search</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="5" y="5" width="24" height="24" rx="3" stroke="#6c47ff" stroke-width="1.7"/>
-            <path d="M12 12h4v4h-4z" fill="#6c47ff" opacity="0.3"/>
-            <path d="M18 12h6M18 17h6M10 22h14" stroke="#6c47ff" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="12" cy="20" r="2" fill="#6c47ff" opacity="0.5"/>
-          </svg>
-        </div>
-        <span class="card-label">Protected Data</span>
+        <div class="card-icon"><i class="ti ti-lock-access"></i></div>
+        <span class="card-label">Protected data</span>
       </div>
+
     </div>
   </div>
 
@@ -784,76 +770,53 @@
   <div class="section">
     <div class="section-title">Knowledge Bases</div>
     <div class="cards-grid">
+
       <div class="card">
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="17" r="13" fill="#FF7A59" opacity="0.15"/>
-            <circle cx="17" cy="17" r="13" stroke="#FF7A59" stroke-width="1.7"/>
-            <path d="M11 17c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6" stroke="#FF7A59" stroke-width="1.7" stroke-linecap="round"/>
-            <circle cx="17" cy="17" r="2.5" fill="#FF7A59"/>
-          </svg>
+          <i class="ti ti-brand-hubspot" style="font-size:28px;color:#FF7A59;"></i>
         </div>
         <span class="card-label">HubSpot</span>
       </div>
+
       <div class="card">
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <path d="M17 8l-7 4v10l7 4 7-4V12L17 8z" stroke="#1868DB" stroke-width="1.7" stroke-linejoin="round"/>
-            <path d="M10 12l7 4 7-4M17 16v10" stroke="#1868DB" stroke-width="1.5"/>
+          <!-- Confluence blue -->
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M3 22c6-8 12-8 24 0" stroke="#1868DB" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M3 8c6 8 12 8 24 0" stroke="#1868DB" stroke-width="2.2" stroke-linecap="round"/>
           </svg>
         </div>
         <span class="card-label">Confluence</span>
       </div>
+
       <div class="card">
-        <div class="badge" data-label="Beta"></div>
+        <div class="ribbon"></div>
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="5" y="5" width="24" height="24" rx="3" fill="#fff" stroke="#e0e0e0" stroke-width="1.5"/>
-            <rect x="9" y="9" width="16" height="5" rx="1" fill="#111"/>
-            <path d="M9 18h16M9 22h10" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+          <i class="ti ti-brand-notion" style="font-size:28px;color:#111;"></i>
         </div>
         <span class="card-label">Notion</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="5" y="8" width="24" height="18" rx="3" stroke="#6c47ff" stroke-width="1.7"/>
-            <path d="M9 14h16M9 18h10" stroke="#6c47ff" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="27" cy="10" r="4" fill="#6c47ff"/>
-            <path d="M25.5 10h3M27 8.5v3" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
-        </div>
+        <div class="card-icon"><i class="ti ti-book-2"></i></div>
         <span class="card-label">ReadMe</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="5" y="5" width="24" height="24" rx="3" stroke="#6c47ff" stroke-width="1.7"/>
-            <path d="M10 12h14M10 17h14M10 22h8" stroke="#6c47ff" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </div>
+        <div class="card-icon"><i class="ti ti-book"></i></div>
         <span class="card-label">Gitbook</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="17" r="13" stroke="#8B5CF6" stroke-width="1.7"/>
-            <path d="M12 22V14l5-5 5 5v8M15 22v-5h4v5" stroke="#8B5CF6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+        <div class="card-icon"><i class="ti ti-files"></i></div>
         <span class="card-label">Document360</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="14" r="6" stroke="#333" stroke-width="1.7"/>
-            <path d="M9 28c0-4.42 3.58-8 8-8s8 3.58 8 8" stroke="#333" stroke-width="1.7" stroke-linecap="round"/>
-            <circle cx="23" cy="9" r="3" fill="#fff" stroke="#333" stroke-width="1.2"/>
-          </svg>
-        </div>
+        <div class="card-icon"><i class="ti ti-feather"></i></div>
         <span class="card-label">KnowledgeOwl</span>
       </div>
+
     </div>
   </div>
 
@@ -861,41 +824,24 @@
   <div class="section">
     <div class="section-title">Customer Relationship Management</div>
     <div class="cards-grid">
+
       <div class="card">
-        <div class="lock-icon">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <rect x="2" y="5.5" width="8" height="6" rx="1.2" stroke="#bbb" stroke-width="1.2"/>
-            <path d="M4 5.5V4a2 2 0 014 0v1.5" stroke="#bbb" stroke-width="1.2"/>
-          </svg>
-        </div>
+        <i class="ti ti-lock lock"></i>
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="17" r="13" fill="#FF7A59" opacity="0.15"/>
-            <circle cx="17" cy="17" r="13" stroke="#FF7A59" stroke-width="1.7"/>
-            <path d="M11 17c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6" stroke="#FF7A59" stroke-width="1.7" stroke-linecap="round"/>
-            <circle cx="17" cy="17" r="2.5" fill="#FF7A59"/>
-          </svg>
+          <i class="ti ti-brand-hubspot" style="font-size:28px;color:#FF7A59;"></i>
         </div>
         <span class="card-label">HubSpot</span>
       </div>
+
       <div class="card">
-        <div class="badge" data-label="Beta"></div>
-        <div class="lock-icon">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <rect x="2" y="5.5" width="8" height="6" rx="1.2" stroke="#bbb" stroke-width="1.2"/>
-            <path d="M4 5.5V4a2 2 0 014 0v1.5" stroke="#bbb" stroke-width="1.2"/>
-          </svg>
-        </div>
+        <div class="ribbon"></div>
+        <i class="ti ti-lock lock"></i>
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="17" r="13" fill="#FF7A59" opacity="0.15"/>
-            <circle cx="17" cy="17" r="13" stroke="#FF7A59" stroke-width="1.7"/>
-            <path d="M11 17c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6" stroke="#FF7A59" stroke-width="1.7" stroke-linecap="round"/>
-            <circle cx="17" cy="17" r="2.5" fill="#FF7A59"/>
-          </svg>
+          <i class="ti ti-brand-hubspot" style="font-size:28px;color:#FF7A59;"></i>
         </div>
         <span class="card-label">HubSpot</span>
       </div>
+
     </div>
   </div>
 
@@ -903,61 +849,48 @@
   <div class="section">
     <div class="section-title">Content Management Systems</div>
     <div class="cards-grid">
+
       <div class="card">
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="2" y="2" width="30" height="30" rx="5" fill="#21759B"/>
-            <path d="M17 5c-2.5 3-4 7.5-4 12s1.5 9 4 12M17 5c2.5 3 4 7.5 4 12s-1.5 9-4 12M5 17h24" stroke="#fff" stroke-width="1.4"/>
-          </svg>
+          <i class="ti ti-brand-wordpress" style="font-size:28px;color:#21759B;"></i>
         </div>
         <span class="card-label">WordPress</span>
       </div>
+
       <div class="card">
         <div class="card-icon">
-          <svg width="34" height="20" viewBox="0 0 60 24" fill="none">
-            <text x="0" y="20" font-size="22" font-weight="900" fill="#111" font-family="Arial">Wix</text>
+          <!-- Wix wordmark -->
+          <svg width="36" height="18" viewBox="0 0 60 24" fill="none">
+            <text x="0" y="20" font-size="22" font-weight="900" fill="#111" font-family="Inter,sans-serif">WIX</text>
           </svg>
         </div>
         <span class="card-label">WIX</span>
       </div>
+
       <div class="card">
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="17" r="13" fill="#146EF5"/>
-            <path d="M10 22c1-4 3-7 7-7s6 3 7 7" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
-            <circle cx="17" cy="13" r="3" fill="#fff"/>
-          </svg>
+          <i class="ti ti-brand-webflow" style="font-size:28px;color:#146EF5;"></i>
         </div>
         <span class="card-label">WebFlow</span>
       </div>
+
       <div class="card">
         <div class="card-icon">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-            <rect x="2" y="2" width="26" height="26" rx="5" fill="#0055FF"/>
-            <path d="M8 22l6-14 3 8 2-5 5 11" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <i class="ti ti-brand-framer" style="font-size:28px;color:#0055FF;"></i>
         </div>
         <span class="card-label">Framer</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="4" y="4" width="26" height="26" rx="4" fill="#222"/>
-            <path d="M8 22l5-10 4 8 3-5 4 7" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+        <div class="card-icon"><i class="ti ti-layout-grid"></i></div>
         <span class="card-label">SquareSpace</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="17" r="13" fill="#007EEB" opacity="0.15"/>
-            <circle cx="17" cy="17" r="13" stroke="#007EEB" stroke-width="1.7"/>
-            <path d="M12 22V15l5-5 5 5v7" stroke="#007EEB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
+        <div class="card-icon"><i class="ti ti-layout"></i></div>
         <span class="card-label">Weebly</span>
       </div>
+
     </div>
   </div>
 
@@ -965,27 +898,24 @@
   <div class="section">
     <div class="section-title">Customer Support</div>
     <div class="cards-grid">
+
       <div class="card">
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="4" y="4" width="26" height="26" rx="5" fill="#03363D"/>
-            <circle cx="17" cy="17" r="6" fill="#78A300"/>
-            <circle cx="17" cy="17" r="3" fill="#fff"/>
+          <!-- Zendesk -->
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="6" fill="#03363D"/>
+            <circle cx="16" cy="16" r="6" fill="#78A300"/>
+            <circle cx="16" cy="16" r="3" fill="#fff"/>
           </svg>
         </div>
         <span class="card-label">Zendesk</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="17" r="13" fill="#25A768" opacity="0.15"/>
-            <circle cx="17" cy="17" r="13" stroke="#25A768" stroke-width="1.7"/>
-            <path d="M11 17c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6" stroke="#25A768" stroke-width="1.7" stroke-linecap="round"/>
-            <circle cx="17" cy="17" r="2.5" fill="#25A768"/>
-          </svg>
-        </div>
+        <div class="card-icon"><i class="ti ti-headset" style="font-size:28px;color:#25A768;"></i></div>
         <span class="card-label">FreshDesk</span>
       </div>
+
     </div>
   </div>
 
@@ -993,47 +923,32 @@
   <div class="section">
     <div class="section-title">Media</div>
     <div class="cards-grid">
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="7" y="4" width="16" height="20" rx="2" stroke="#6c47ff" stroke-width="1.7"/>
-            <path d="M11 10h8M11 14h8M11 18h5" stroke="#6c47ff" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M20 22l4 4" stroke="#6c47ff" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="22" cy="26" r="4" stroke="#6c47ff" stroke-width="1.7"/>
-          </svg>
-        </div>
-        <span class="card-label">File Upload</span>
+        <div class="card-icon"><i class="ti ti-cloud-upload"></i></div>
+        <span class="card-label">File upload</span>
       </div>
+
       <div class="card">
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="2" y="6" width="30" height="22" rx="4" fill="#FF0000"/>
-            <polygon points="14,12 14,22 23,17" fill="#fff"/>
-          </svg>
+          <i class="ti ti-brand-youtube" style="font-size:28px;color:#FF0000;"></i>
         </div>
         <span class="card-label">YouTube</span>
       </div>
+
       <div class="card">
-        <div class="badge" data-label="Beta"></div>
+        <div class="ribbon"></div>
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="17" r="13" fill="#1AB7EA" opacity="0.15"/>
-            <circle cx="17" cy="17" r="13" stroke="#1AB7EA" stroke-width="1.7"/>
-            <polygon points="14,12 14,22 23,17" fill="#1AB7EA"/>
-          </svg>
+          <i class="ti ti-brand-vimeo" style="font-size:28px;color:#1AB7EA;"></i>
         </div>
         <span class="card-label">Vimeo</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-            <path d="M15 4a11 11 0 100 22A11 11 0 0015 4z" fill="#F26522" opacity="0.15"/>
-            <path d="M15 4a11 11 0 100 22A11 11 0 0015 4z" stroke="#F26522" stroke-width="1.7"/>
-            <path d="M8 12h14M8 16h14M8 20h14" stroke="#F26522" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <span class="card-label">RSS Feed</span>
+        <div class="card-icon"><i class="ti ti-rss"></i></div>
+        <span class="card-label">RSS feed</span>
       </div>
+
     </div>
   </div>
 
@@ -1041,46 +956,31 @@
   <div class="section">
     <div class="section-title">E-Commerce</div>
     <div class="cards-grid">
+
       <div class="card">
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="17" r="13" fill="#5C6AC4" opacity="0.15"/>
-            <circle cx="17" cy="17" r="13" stroke="#5C6AC4" stroke-width="1.7"/>
-            <path d="M11 13l2 10h8l2-10H11z" stroke="#5C6AC4" stroke-width="1.5" stroke-linejoin="round"/>
-            <path d="M14 13c0-1.66 1.34-3 3-3s3 1.34 3 3" stroke="#5C6AC4" stroke-width="1.5"/>
-          </svg>
+          <i class="ti ti-brand-shopify" style="font-size:28px;color:#5C6AC4;"></i>
         </div>
         <span class="card-label">Shopify</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <path d="M17 4L4 17l13 13 13-13L17 4z" fill="#EE672F" opacity="0.15" stroke="#EE672F" stroke-width="1.7"/>
-            <circle cx="17" cy="17" r="5" stroke="#EE672F" stroke-width="1.7"/>
-          </svg>
-        </div>
+        <div class="card-icon"><i class="ti ti-diamond"></i></div>
         <span class="card-label">Magento</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <rect x="4" y="4" width="26" height="26" rx="4" fill="#111"/>
-            <text x="9" y="23" font-size="13" font-weight="900" fill="#fff" font-family="Arial">B</text>
-            <line x1="19" y1="8" x2="19" y2="26" stroke="#fff" stroke-width="2"/>
-          </svg>
-        </div>
+        <div class="card-icon"><i class="ti ti-shopping-bag"></i></div>
         <span class="card-label">BigCommerce</span>
       </div>
+
       <div class="card">
         <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="17" r="13" fill="#7F54B3" opacity="0.15"/>
-            <circle cx="17" cy="17" r="13" stroke="#7F54B3" stroke-width="1.7"/>
-            <path d="M10 17c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7" stroke="#7F54B3" stroke-width="1.7" stroke-linecap="round"/>
-          </svg>
+          <i class="ti ti-brand-woocommerce" style="font-size:28px;color:#7F54B3;"></i>
         </div>
         <span class="card-label">WooCommerce</span>
       </div>
+
     </div>
   </div>
 
@@ -1088,90 +988,78 @@
   <div class="section">
     <div class="section-title">Connectors</div>
     <div class="cards-grid">
+
       <div class="card">
         <div class="card-icon">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <rect x="3" y="3" width="30" height="30" rx="8" fill="#FF4F11"/>
-            <path d="M10 18l3 3 3-3M22 15l-3-3-3 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="15" y="12" width="6" height="12" rx="1" fill="#fff"/>
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+            <rect x="2" y="2" width="30" height="30" rx="7" fill="#FF4A00"/>
+            <path d="M10 17l3.5 3.5L17 17l3.5 3.5L24 17M10 17l3.5-3.5L17 17l3.5-3.5L24 17" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <span class="card-label">Zapier</span>
       </div>
+
       <div class="card">
-        <div class="card-icon">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <circle cx="17" cy="8" r="4" stroke="#6c47ff" stroke-width="1.6"/>
-            <circle cx="8" cy="26" r="4" stroke="#6c47ff" stroke-width="1.6"/>
-            <circle cx="26" cy="26" r="4" stroke="#6c47ff" stroke-width="1.6"/>
-            <path d="M17 12v6M13 23l-2-3M21 23l2-3" stroke="#6c47ff" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </div>
+        <div class="card-icon"><i class="ti ti-plug-connected"></i></div>
         <span class="card-label">API</span>
       </div>
+
     </div>
   </div>
 
 </main>
 
-<!-- ── No KB Overlay ── -->
-<div class="overlay-backdrop" id="overlay">
-  <div class="overlay">
-    <div class="overlay-icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="#6c47ff" stroke-width="1.8" stroke-linejoin="round"/>
-      </svg>
+<!-- ────────────────────────────────────────
+     MODAL — No Knowledge Base
+──────────────────────────────────────── -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+    <div class="modal-icon-wrap">
+      <i class="ti ti-sparkles"></i>
     </div>
-    <div class="overlay-title">Start without a knowledge base</div>
-    <div class="overlay-body">
-      Your agent uses AI reasoning and tools — no uploaded content required.
-    </div>
-    <ul class="overlay-list">
-      <li>Workflow agents &amp; orchestration</li>
-      <li>Tool-calling and API integrations</li>
-      <li>Prompt-only assistants</li>
+
+    <h2 class="modal-title" id="modalTitle">Start without a knowledge base</h2>
+
+    <p class="modal-body">
+      Your agent uses AI reasoning and tools only — no uploaded content required.
+    </p>
+
+    <ul class="modal-list">
+      <li><i class="ti ti-check"></i> Workflow agents &amp; orchestration</li>
+      <li><i class="ti ti-check"></i> Tool-calling and API integrations</li>
+      <li><i class="ti ti-check"></i> Prompt-only assistants</li>
     </ul>
-    <div class="overlay-note">
+
+    <div class="modal-note">
       You can connect a data source anytime from agent settings.
     </div>
-    <div class="overlay-actions">
-      <button class="btn-back" id="overlayBack">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+
+    <div class="modal-actions">
+      <button class="btn-back" id="btnBack">
+        <i class="ti ti-arrow-left"></i>
         Back to sources
       </button>
-      <button class="btn-primary" id="overlayCreate">Create agent</button>
+      <button class="btn-primary" id="btnCreate">Create agent</button>
     </div>
+
   </div>
 </div>
 
 <script>
-  const card = document.getElementById('noKbCard');
-  const overlay = document.getElementById('overlay');
-  const backBtn = document.getElementById('overlayBack');
-  const createBtn = document.getElementById('overlayCreate');
+  const card    = document.getElementById('noKbCard');
+  const backdrop = document.getElementById('modalBackdrop');
+  const btnBack  = document.getElementById('btnBack');
+  const btnCreate = document.getElementById('btnCreate');
 
-  card.addEventListener('click', () => {
-    overlay.classList.add('open');
+  card.addEventListener('click', () => backdrop.classList.add('open'));
+  btnBack.addEventListener('click', () => backdrop.classList.remove('open'));
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) backdrop.classList.remove('open'); });
+  btnCreate.addEventListener('click', () => {
+    backdrop.classList.remove('open');
+    alert('→ Navigating to agent config — system prompt, tools, model');
   });
-
-  backBtn.addEventListener('click', () => {
-    overlay.classList.remove('open');
-  });
-
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) overlay.classList.remove('open');
-  });
-
-  createBtn.addEventListener('click', () => {
-    alert('→ Navigating to agent config (system prompt, tools, model settings)');
-    overlay.classList.remove('open');
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') overlay.classList.remove('open');
-  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') backdrop.classList.remove('open'); });
 </script>
 
 </body>
