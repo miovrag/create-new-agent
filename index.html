@@ -26,16 +26,10 @@
 
         }
 
-      /* Card hover — P3 border and background tint only; no colored shadow */
-      .card:hover {
-        border-color: color(display-p3 0.64 0.60 0.97 / 0.80);
-        background:   color(display-p3 0.45 0.40 0.94 / 0.03);
-      }
-
-      /* No KB card hover — stronger P3 border + tint (featured card) */
+      /* Card hover — shadow lift only; background stays --cg-bg-muted */
+      .card:hover,
       .card-no-kb:hover {
-        border-color: color(display-p3 0.45 0.40 0.94);
-        background:   color(display-p3 0.45 0.40 0.94 / 0.05);
+        background: #F5F5F5;
       }
     }
 
@@ -369,9 +363,9 @@
       position: relative;
       width: 128px;
       height: 128px;
-      background: var(--cg-white);
-      border: 1px solid var(--cg-gray-200);
-      border-radius: var(--cg-radius-3x);
+      background: var(--cg-bg-muted);
+      border: none;
+      border-radius: var(--cg-radius-2x);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -385,9 +379,8 @@
     }
 
     .card:hover {
-      border-color: var(--cg-primary-300);
-      background:   var(--cg-primary-8);
-      box-shadow:   var(--cg-shadow-card);
+      background: var(--cg-bg-muted);
+      box-shadow: var(--cg-shadow-card);
     }
 
     .card-icon {
@@ -442,13 +435,12 @@
        NO KNOWLEDGE BASE CARD
     ────────────────────────────── */
     .card-no-kb {
-      border: 1.5px dashed var(--cg-primary-300);
-      background: var(--cg-white);
+      border: none;
+      background: var(--cg-bg-muted);
     }
 
     .card-no-kb:hover {
-      border-color: var(--cg-primary);
-      background: var(--cg-primary-8);
+      background: var(--cg-bg-muted);
       box-shadow: var(--cg-shadow-card);
     }
 
@@ -485,9 +477,9 @@
     .modal {
       position: relative;
       background: var(--cg-white);
-      border-radius: var(--cg-radius-5x);
+      border-radius: var(--cg-radius-2x);
       padding: var(--cg-space-6);
-      width: 400px;
+      width: 464px;
       box-shadow: var(--cg-shadow-modal);
       animation: modal-in var(--cg-dur-med) var(--cg-ease-standard);
     }
@@ -561,22 +553,17 @@
       flex-shrink: 0;
     }
 
-    /* ── Info alert — design system a-info variant ── */
+    /* ── Modal note — white card with neutral border ── */
     .modal-note {
       display: flex;
       align-items: center;
-      gap: var(--cg-space-3);
-      padding: var(--cg-space-3) var(--cg-space-4);
-      border-radius: var(--cg-radius-1_5x);
-      background: rgba(0, 207, 232, 0.12);
-      color: #00A1B5;
+      padding: var(--cg-space-2) var(--cg-space-4);
+      border-radius: 6px;
+      border: 1px solid #DCE3E1;
+      background: #fff;
+      color: #5C53C0;
       font: 400 13px/18px var(--cg-font-body);
       margin-bottom: var(--cg-space-6);
-    }
-
-    .modal-note svg {
-      width: 20px; height: 20px;
-      flex-shrink: 0;
     }
 
     .modal-note a {
@@ -611,7 +598,7 @@
     .modal-actions {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: var(--cg-space-2);
     }
 
@@ -1111,22 +1098,21 @@
     </button>
 
     <!-- Title -->
-    <h2 class="modal-title" id="modalTitle">Build with AI only</h2>
+    <h2 class="modal-title" id="modalTitle">Start without a data source</h2>
 
-    <!-- Subtitle — replaces redundant body paragraph -->
-    <p class="modal-subtitle">No files, no crawling — pure reasoning, tools, and your system prompt.</p>
+    <!-- Subtitle -->
+    <p class="modal-subtitle">Every other option on this page ingests external data first. This one skips that step — you go straight to building.</p>
 
-    <!-- Best-for list -->
+    <!-- What you get -->
     <ul class="modal-list">
-      <li><i class="ti ti-check"></i> Workflow agents &amp; orchestration</li>
-      <li><i class="ti ti-check"></i> Tool-calling and API integrations</li>
-      <li><i class="ti ti-check"></i> Prompt-only assistants</li>
+      <li><i class="ti ti-check"></i> Instant AI assistant, no data setup</li>
+      <li><i class="ti ti-check"></i> Works with any tool or API</li>
+      <li><i class="ti ti-check"></i> Handles multi-step tasks automatically</li>
     </ul>
 
-    <!-- Info alert — a-info variant -->
+    <!-- Alert — reframed as advantage -->
     <div class="modal-note">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>
-      You can connect a data source anytime from agent settings. <a href="#" onclick="return false;">Learn more</a>
+      You can always add a data source later from agent settings — nothing is locked in. <a href="#" onclick="return false;">Learn more</a>
     </div>
 
     <!-- Divider -->
@@ -1134,11 +1120,7 @@
 
     <!-- Actions -->
     <div class="modal-actions">
-      <button class="btn-ghost" id="btnBack">
-        <i class="ti ti-arrow-left"></i>
-        Back to sources
-      </button>
-      <button class="btn-primary" id="btnCreate">Create agent</button>
+      <button class="btn-primary" id="btnCreate">Create agent →</button>
     </div>
 
     <!-- Error state — shown on API failure -->
@@ -1155,7 +1137,6 @@
   const backdrop   = document.getElementById('modalBackdrop');
   const modal      = backdrop.querySelector('.modal');
   const btnClose   = document.getElementById('btnClose');
-  const btnBack    = document.getElementById('btnBack');
   const btnCreate  = document.getElementById('btnCreate');
   const modalError = document.getElementById('modalError');
 
@@ -1179,7 +1160,7 @@
   function resetBtn() {
     btnCreate.classList.remove('loading');
     btnCreate.disabled = false;
-    btnCreate.textContent = 'Create agent';
+    btnCreate.textContent = 'Create agent →';
   }
 
   // Focus trap
@@ -1197,8 +1178,7 @@
 
   card.addEventListener('click', openModal);
   btnClose.addEventListener('click', closeModal);
-  btnBack.addEventListener('click', closeModal);
-  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal(); });
 
   btnCreate.addEventListener('click', () => {
