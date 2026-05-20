@@ -309,7 +309,7 @@
     .cards-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--cg-space-2);
+      gap: var(--cg-space-3);
     }
 
     /* ──────────────────────────────
@@ -317,16 +317,16 @@
     ────────────────────────────── */
     .card {
       position: relative;
-      width: 100px;
-      height: 100px;
+      width: 128px;
+      height: 128px;
       background: var(--cg-white);
       border: 1px solid var(--cg-gray-200);
-      border-radius: var(--cg-radius-2x);
+      border-radius: var(--cg-radius-3x);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: var(--cg-space-2);
+      gap: var(--cg-space-3);
       cursor: pointer;
       overflow: hidden;
       transition: border-color var(--cg-dur-fast) var(--cg-ease-standard),
@@ -341,22 +341,22 @@
     }
 
     .card-icon {
-      width: 36px; height: 36px;
+      width: 48px; height: 48px;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
 
     /* Generic UI icons — brand purple */
     .card-icon .ti {
-      font-size: 28px;
+      font-size: 36px;
       color: var(--cg-primary);
     }
 
     .card-label {
-      font: 500 var(--cg-label-12-size)/var(--cg-label-12-lh) var(--cg-font-sans);
+      font: 500 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-sans);
       color: var(--cg-fg-2);
       text-align: center;
-      padding: 0 var(--cg-space-1);
+      padding: 0 var(--cg-space-2);
     }
 
     /* Corner ribbon — Beta */
@@ -364,17 +364,17 @@
       position: absolute;
       top: 0; left: 0;
       overflow: hidden;
-      width: 38px; height: 38px;
+      width: 48px; height: 48px;
       pointer-events: none;
     }
 
     .ribbon::after {
       content: "Beta";
       position: absolute;
-      top: 5px; left: -12px;
-      width: 48px;
+      top: 8px; left: -14px;
+      width: 56px;
       text-align: center;
-      font: 700 7px/14px var(--cg-font-sans);
+      font: 700 8px/16px var(--cg-font-sans);
       color: #fff;
       background: var(--cg-primary);
       transform: rotate(-45deg);
@@ -711,7 +711,7 @@
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="assets/website.png" width="32" height="32" alt="Website logo"></div>
+        <div class="card-icon"><img src="assets/website.png" width="40" height="40" alt="Website logo"></div>
         <span class="card-label">Website</span>
       </div>
 
@@ -726,17 +726,17 @@
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/zapier" width="32" height="32" alt="Zapier logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/zapier" width="40" height="40" alt="Zapier logo"></div>
         <span class="card-label">Zapier</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/wordpress" width="32" height="32" alt="WordPress logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/wordpress" width="40" height="40" alt="WordPress logo"></div>
         <span class="card-label">WordPress</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/youtube" width="32" height="32" alt="YouTube logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/youtube" width="40" height="40" alt="YouTube logo"></div>
         <span class="card-label">YouTube</span>
       </div>
 
@@ -750,32 +750,32 @@
 
       <div class="card">
         <div class="ribbon"></div>
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/googledrive" width="32" height="32" alt="Google Drive logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/googledrive" width="40" height="40" alt="Google Drive logo"></div>
         <span class="card-label">Google Drive</span>
       </div>
 
       <div class="card">
         <i class="ti ti-lock lock"></i>
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/dropbox" width="32" height="32" alt="Dropbox logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/dropbox" width="40" height="40" alt="Dropbox logo"></div>
         <span class="card-label">Dropbox</span>
       </div>
 
       <div class="card">
         <div class="ribbon"></div>
         <i class="ti ti-lock lock"></i>
-        <div class="card-icon"><img src="assets/sharepoint.svg" width="32" height="32" alt="SharePoint logo"></div>
+        <div class="card-icon"><img src="assets/sharepoint.svg" width="40" height="40" alt="SharePoint logo"></div>
         <span class="card-label">SharePoint Docs</span>
       </div>
 
       <div class="card">
         <div class="ribbon"></div>
         <i class="ti ti-lock lock"></i>
-        <div class="card-icon"><img src="assets/sharepoint.svg" width="32" height="32" alt="SharePoint logo"></div>
+        <div class="card-icon"><img src="assets/sharepoint.svg" width="40" height="40" alt="SharePoint logo"></div>
         <span class="card-label">SharePoint Sites</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="assets/onedrive.svg" width="32" height="32" alt="OneDrive logo"></div>
+        <div class="card-icon"><img src="assets/onedrive.svg" width="40" height="40" alt="OneDrive logo"></div>
         <span class="card-label">OneDrive</span>
       </div>
 
@@ -788,12 +788,12 @@
     <div class="cards-grid">
 
       <div class="card">
-        <div class="card-icon"><img src="assets/website.png" width="32" height="32" alt="Website logo"></div>
+        <div class="card-icon"><img src="assets/website.png" width="40" height="40" alt="Website logo"></div>
         <span class="card-label">Website</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="assets/sitemap.svg" width="32" height="32" alt="Sitemap logo"></div>
+        <div class="card-icon"><img src="assets/sitemap.svg" width="40" height="40" alt="Sitemap logo"></div>
         <span class="card-label">Sitemap</span>
       </div>
 
@@ -821,33 +821,33 @@
     <div class="cards-grid">
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/hubspot" width="32" height="32" alt="HubSpot logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/hubspot" width="40" height="40" alt="HubSpot logo"></div>
         <span class="card-label">HubSpot</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/confluence" width="32" height="32" alt="Confluence logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/confluence" width="40" height="40" alt="Confluence logo"></div>
         <span class="card-label">Confluence</span>
       </div>
 
       <div class="card">
         <div class="ribbon"></div>
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/notion" width="32" height="32" alt="Notion logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/notion" width="40" height="40" alt="Notion logo"></div>
         <span class="card-label">Notion</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/readme" width="32" height="32" alt="ReadMe logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/readme" width="40" height="40" alt="ReadMe logo"></div>
         <span class="card-label">ReadMe</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/gitbook" width="32" height="32" alt="GitBook logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/gitbook" width="40" height="40" alt="GitBook logo"></div>
         <span class="card-label">Gitbook</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/document360" width="32" height="32" alt="Document360 logo"
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/document360" width="40" height="40" alt="Document360 logo"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <i class="ti ti-files" style="display:none;font-size:28px;color:var(--cg-primary);"></i>
         </div>
@@ -869,14 +869,14 @@
 
       <div class="card">
         <i class="ti ti-lock lock"></i>
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/hubspot" width="32" height="32" alt="HubSpot logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/hubspot" width="40" height="40" alt="HubSpot logo"></div>
         <span class="card-label">HubSpot</span>
       </div>
 
       <div class="card">
         <div class="ribbon"></div>
         <i class="ti ti-lock lock"></i>
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/hubspot" width="32" height="32" alt="HubSpot logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/hubspot" width="40" height="40" alt="HubSpot logo"></div>
         <span class="card-label">HubSpot</span>
       </div>
 
@@ -889,32 +889,32 @@
     <div class="cards-grid">
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/wordpress" width="32" height="32" alt="WordPress logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/wordpress" width="40" height="40" alt="WordPress logo"></div>
         <span class="card-label">WordPress</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/wix" width="32" height="32" alt="Wix logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/wix" width="40" height="40" alt="Wix logo"></div>
         <span class="card-label">Wix</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/webflow" width="32" height="32" alt="Webflow logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/webflow" width="40" height="40" alt="Webflow logo"></div>
         <span class="card-label">Webflow</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/framer" width="32" height="32" alt="Framer logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/framer" width="40" height="40" alt="Framer logo"></div>
         <span class="card-label">Framer</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/squarespace" width="32" height="32" alt="Squarespace logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/squarespace" width="40" height="40" alt="Squarespace logo"></div>
         <span class="card-label">Squarespace</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/weebly" width="32" height="32" alt="Weebly logo"
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/weebly" width="40" height="40" alt="Weebly logo"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <i class="ti ti-layout" style="display:none;font-size:28px;color:var(--cg-primary);"></i>
         </div>
@@ -930,12 +930,12 @@
     <div class="cards-grid">
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/zendesk" width="32" height="32" alt="Zendesk logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/zendesk" width="40" height="40" alt="Zendesk logo"></div>
         <span class="card-label">Zendesk</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/freshdesk" width="32" height="32" alt="Freshdesk logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/freshdesk" width="40" height="40" alt="Freshdesk logo"></div>
         <span class="card-label">Freshdesk</span>
       </div>
 
@@ -953,18 +953,18 @@
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/youtube" width="32" height="32" alt="YouTube logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/youtube" width="40" height="40" alt="YouTube logo"></div>
         <span class="card-label">YouTube</span>
       </div>
 
       <div class="card">
         <div class="ribbon"></div>
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/vimeo" width="32" height="32" alt="Vimeo logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/vimeo" width="40" height="40" alt="Vimeo logo"></div>
         <span class="card-label">Vimeo</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/rss" width="32" height="32" alt="RSS logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/rss" width="40" height="40" alt="RSS logo"></div>
         <span class="card-label">RSS feed</span>
       </div>
 
@@ -977,17 +977,17 @@
     <div class="cards-grid">
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/shopify" width="32" height="32" alt="Shopify logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/shopify" width="40" height="40" alt="Shopify logo"></div>
         <span class="card-label">Shopify</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/magento" width="32" height="32" alt="Magento logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/magento" width="40" height="40" alt="Magento logo"></div>
         <span class="card-label">Magento</span>
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/bigcommerce" width="32" height="32" alt="BigCommerce logo"
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/bigcommerce" width="40" height="40" alt="BigCommerce logo"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <i class="ti ti-shopping-bag" style="display:none;font-size:28px;color:var(--cg-primary);"></i>
         </div>
@@ -995,7 +995,7 @@
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/woocommerce" width="32" height="32" alt="WooCommerce logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/woocommerce" width="40" height="40" alt="WooCommerce logo"></div>
         <span class="card-label">WooCommerce</span>
       </div>
 
@@ -1008,7 +1008,7 @@
     <div class="cards-grid">
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/zapier" width="32" height="32" alt="Zapier logo"></div>
+        <div class="card-icon"><img src="https://cdn.simpleicons.org/zapier" width="40" height="40" alt="Zapier logo"></div>
         <span class="card-label">Zapier</span>
       </div>
 
