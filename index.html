@@ -534,22 +534,19 @@
     /* ── Info callout note — left-border accent, body-14 text ── */
     .modal-note {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: var(--cg-space-3);
-      background: var(--cg-primary-8);
-      border-left: 4px solid var(--cg-primary);
-      border-radius: 0 var(--cg-radius-1_5x) var(--cg-radius-1_5x) 0;
       padding: var(--cg-space-3) var(--cg-space-4);
-      font: 400 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-body);
-      color: var(--cg-fg-2);
+      border-radius: var(--cg-radius-1_5x);
+      background: rgba(0, 207, 232, 0.12);
+      color: #00A1B5;
+      font: 400 13px/18px var(--cg-font-body);
       margin-bottom: var(--cg-space-6);
     }
 
-    .modal-note .ti {
-      font-size: 16px;
-      color: var(--cg-primary);
+    .modal-note svg {
+      width: 20px; height: 20px;
       flex-shrink: 0;
-      margin-top: 2px;
     }
 
     /* ── Divider ── */
@@ -1055,7 +1052,7 @@
 
     <!-- Info callout -->
     <div class="modal-note">
-      <i class="ti ti-info-circle"></i>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/></svg>
       You can connect a data source anytime from agent settings.
     </div>
 
