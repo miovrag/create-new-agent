@@ -15,6 +15,7 @@
     /* ── HDR / Display P3 enhancement ── */
     @media (color-gamut: p3) {
       :root {
+        /* Brand / semantic tokens — vivid P3 expressions */
         --cg-primary:        color(display-p3 0.45 0.40 0.94);
         --cg-primary-hover:  color(display-p3 0.41 0.36 0.85);
         --cg-primary-active: color(display-p3 0.36 0.32 0.75);
@@ -22,6 +23,26 @@
         --cg-warning-500:    color(display-p3 1.00 0.62 0.26);
         --cg-danger-500:     color(display-p3 0.92 0.33 0.33);
         --cg-info-500:       color(display-p3 0.00 0.81 0.91);
+
+        /* Primary shadow tokens — P3 glow (sRGB fallbacks use rgba(115,103,240,…)
+           which don't inherit the P3 override above, so we re-declare them here) */
+        --cg-primary-shadow-sm:      0 2px  4px color(display-p3 0.45 0.40 0.94 / 0.36);
+        --cg-primary-shadow-default: 0 2px  6px color(display-p3 0.45 0.40 0.94 / 0.42);
+        --cg-primary-shadow-lg:      0 4px 18px color(display-p3 0.45 0.40 0.94 / 0.50);
+      }
+
+      /* Card hover — richer P3 glow that goes beyond what sRGB can reproduce */
+      .card:hover {
+        border-color: color(display-p3 0.64 0.60 0.97 / 0.80);
+        background:   color(display-p3 0.45 0.40 0.94 / 0.03);
+        box-shadow:   0 4px 20px color(display-p3 0.45 0.40 0.94 / 0.26);
+      }
+
+      /* No KB card hover — stronger P3 glow (featured card) */
+      .card-no-kb:hover {
+        border-color: color(display-p3 0.45 0.40 0.94);
+        background:   color(display-p3 0.45 0.40 0.94 / 0.05);
+        box-shadow:   0 4px 24px color(display-p3 0.45 0.40 0.94 / 0.36);
       }
     }
 
@@ -316,12 +337,14 @@
       cursor: pointer;
       overflow: hidden;
       transition: border-color var(--cg-dur-fast) var(--cg-ease-standard),
-                  box-shadow var(--cg-dur-fast) var(--cg-ease-standard);
+                  box-shadow     var(--cg-dur-fast) var(--cg-ease-standard),
+                  background     var(--cg-dur-fast) var(--cg-ease-standard);
     }
 
     .card:hover {
       border-color: var(--cg-primary-300);
-      box-shadow: var(--cg-shadow-card);
+      background:   rgba(115, 103, 240, 0.02);
+      box-shadow:   var(--cg-primary-shadow-default);
     }
 
     .card-icon {
