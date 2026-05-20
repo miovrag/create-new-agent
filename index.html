@@ -26,10 +26,10 @@
 
         }
 
-      /* Card hover — shadow lift only; background stays --cg-bg-muted */
+      /* Card hover — deeper shadow on P3 displays */
       .card:hover,
       .card-no-kb:hover {
-        background: #F5F5F5;
+        background: #fff;
       }
     }
 
@@ -176,12 +176,17 @@
     }
 
     .copilot-label {
+      display: flex;
+      align-items: center;
+      gap: var(--cg-space-1);
       font: 600 var(--cg-overline-12-size)/var(--cg-overline-12-lh) var(--cg-font-sans);
       color: var(--cg-fg-3);
       letter-spacing: 0.06em;
       text-transform: uppercase;
       margin-bottom: var(--cg-space-2);
     }
+
+    .copilot-label .ti { font-size: 13px; color: var(--cg-primary); }
 
     .copilot-input {
       display: flex;
@@ -207,7 +212,20 @@
     }
 
     .copilot-input input::placeholder { color: var(--cg-fg-4); }
-    .copilot-input .ti { font-size: 16px; color: var(--cg-fg-4); }
+
+    .copilot-input .ti {
+      font-size: 18px;
+      width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--cg-radius-base);
+      color: var(--cg-white);
+      background: var(--cg-primary);
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: background var(--cg-dur-fast) var(--cg-ease-standard);
+    }
+
+    .copilot-input .ti:hover { background: var(--cg-primary-hover); }
 
     .sidebar-footer {
       padding: var(--cg-space-2) var(--cg-space-3);
@@ -257,7 +275,6 @@
       margin-bottom: var(--cg-space-4);
     }
 
-    /* Search bar */
     /* ── Search row ── */
     .search-wrap {
       display: flex;
@@ -314,32 +331,26 @@
 
     .search-input:focus ~ svg.lead { color: var(--cg-primary); }
 
-    /* ── Settings button — btn-ghost with icon + label ── */
+    /* ── Settings button — plain text link style ── */
     .btn-settings {
       display: inline-flex;
       align-items: center;
       gap: var(--cg-space-2);
       height: 40px;
-      padding: 0 var(--cg-space-4);
-      background: var(--cg-white);
-      color: var(--cg-fg-2);
-      border: 1px solid var(--cg-gray-200);
-      border-radius: var(--cg-radius-2x);
+      padding: 0 var(--cg-space-3);
+      background: transparent;
+      color: var(--cg-primary);
+      border: none;
       font: 500 var(--cg-label-14-size)/var(--cg-label-14-lh) var(--cg-font-sans);
       cursor: pointer;
       white-space: nowrap;
       flex-shrink: 0;
-      transition: background 120ms var(--cg-ease-standard),
-                  border-color 120ms var(--cg-ease-standard);
+      transition: opacity 120ms var(--cg-ease-standard);
     }
 
-    .btn-settings:hover {
-      background: var(--cg-gray-100);
-      border-color: var(--cg-gray-300);
-    }
-
-    .btn-settings:active { background: var(--cg-gray-200); }
-    .btn-settings .ti { font-size: 16px; color: var(--cg-fg-3); }
+    .btn-settings:hover { opacity: 0.75; }
+    .btn-settings:active { opacity: 0.6; }
+    .btn-settings .ti { font-size: 16px; color: var(--cg-primary); }
 
     /* ── Sections ── */
     .section { margin-bottom: var(--cg-space-8); }
@@ -363,9 +374,10 @@
       position: relative;
       width: 128px;
       height: 128px;
-      background: var(--cg-bg-muted);
+      background: var(--cg-white);
       border: none;
-      border-radius: var(--cg-radius-2x);
+      border-radius: var(--cg-radius-3x);
+      box-shadow: var(--cg-shadow-card);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -379,8 +391,8 @@
     }
 
     .card:hover {
-      background: var(--cg-bg-muted);
-      box-shadow: var(--cg-shadow-card);
+      background: var(--cg-white);
+      box-shadow: var(--cg-shadow-default);
     }
 
     .card-icon {
@@ -436,12 +448,12 @@
     ────────────────────────────── */
     .card-no-kb {
       border: none;
-      background: var(--cg-bg-muted);
+      background: var(--cg-white);
     }
 
     .card-no-kb:hover {
-      background: var(--cg-bg-muted);
-      box-shadow: var(--cg-shadow-card);
+      background: var(--cg-white);
+      box-shadow: var(--cg-shadow-default);
     }
 
 
@@ -723,10 +735,10 @@
   </nav>
 
   <div class="sidebar-copilot">
-    <div class="copilot-label">CustomGPT.ai Copilot</div>
+    <div class="copilot-label"><i class="ti ti-sparkles"></i> CustomGPT.ai Copilot</div>
     <div class="copilot-input">
       <input type="text" placeholder="I need help with…" />
-      <i class="ti ti-send"></i>
+      <i class="ti ti-arrow-up"></i>
     </div>
   </div>
 
@@ -1040,7 +1052,11 @@
       </div>
 
       <div class="card">
-        <div class="card-icon"><img src="https://cdn.simpleicons.org/magento" width="40" height="40" alt="Magento logo"></div>
+        <div class="card-icon">
+          <img src="https://cdn.simpleicons.org/magento" width="40" height="40" alt="Magento logo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block'">
+          <i class="ti ti-shopping-cart" style="display:none;font-size:28px;color:var(--cg-primary);"></i>
+        </div>
         <span class="card-label">Magento</span>
       </div>
 
