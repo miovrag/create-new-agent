@@ -264,35 +264,88 @@
     }
 
     /* Search bar */
-    .search-bar {
+    /* ── Search row ── */
+    .search-wrap {
       display: flex;
       align-items: center;
       gap: var(--cg-space-3);
-      height: 40px;
-      padding: 0 var(--cg-space-4);
-      border: 1px solid var(--cg-gray-200);
-      border-radius: var(--cg-radius-2x);
-      background: var(--cg-white);
       margin-bottom: var(--cg-space-8);
       max-width: 760px;
-      transition: border-color var(--cg-dur-fast);
     }
 
-    .search-bar:focus-within { border-color: var(--cg-primary); }
-
-    .search-bar input {
+    /* ── Search input — design system wrap-icon has-lead pattern ── */
+    .search-input-wrap {
+      position: relative;
       flex: 1;
-      border: none;
-      background: transparent;
-      font: 400 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-body);
-      color: var(--cg-fg-2);
-      outline: none;
     }
 
-    .search-bar input::placeholder { color: var(--cg-fg-4); }
-    .search-bar .ti-search { font-size: 18px; color: var(--cg-fg-4); flex-shrink: 0; }
-    .search-bar .ti-settings { font-size: 18px; color: var(--cg-fg-4); margin-left: auto; cursor: pointer; flex-shrink: 0; }
-    .search-bar .ti-settings:hover { color: var(--cg-fg-2); }
+    .search-input-wrap svg.lead {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px; height: 16px;
+      color: var(--cg-fg-3);
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      box-sizing: border-box;
+      height: 40px;
+      padding: 0 var(--cg-space-4) 0 36px;
+      border: 1px solid var(--cg-gray-300);
+      border-radius: var(--cg-radius-2x);
+      background: var(--cg-white);
+      font: 400 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-body);
+      color: var(--cg-fg-1);
+      outline: none;
+      transition: border-color 120ms var(--cg-ease-standard),
+                  box-shadow   120ms var(--cg-ease-standard),
+                  background   120ms var(--cg-ease-standard);
+    }
+
+    .search-input::placeholder { color: var(--cg-fg-4); }
+
+    .search-input:hover {
+      border-color: var(--cg-fg-4);
+      background: var(--cg-bg-body);
+    }
+
+    .search-input:focus {
+      border-color: var(--cg-primary);
+      box-shadow: 0 0 0 3px rgba(115, 103, 240, 0.20);
+      background: var(--cg-white);
+    }
+
+    .search-input:focus ~ svg.lead { color: var(--cg-primary); }
+
+    /* ── Settings button — btn-ghost with icon + label ── */
+    .btn-settings {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--cg-space-2);
+      height: 40px;
+      padding: 0 var(--cg-space-4);
+      background: var(--cg-white);
+      color: var(--cg-fg-2);
+      border: 1px solid var(--cg-gray-200);
+      border-radius: var(--cg-radius-2x);
+      font: 500 var(--cg-label-14-size)/var(--cg-label-14-lh) var(--cg-font-sans);
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 120ms var(--cg-ease-standard),
+                  border-color 120ms var(--cg-ease-standard);
+    }
+
+    .btn-settings:hover {
+      background: var(--cg-gray-100);
+      border-color: var(--cg-gray-300);
+    }
+
+    .btn-settings:active { background: var(--cg-gray-200); }
+    .btn-settings .ti { font-size: 16px; color: var(--cg-fg-3); }
 
     /* ── Sections ── */
     .section { margin-bottom: var(--cg-space-8); }
@@ -712,10 +765,17 @@
 
   <h1 class="page-title">Pick data source for your agent</h1>
 
-  <div class="search-bar">
-    <i class="ti ti-search"></i>
-    <input type="text" placeholder="Find the source you need quickly" />
-    <i class="ti ti-settings"></i>
+  <div class="search-wrap">
+    <div class="search-input-wrap">
+      <input class="search-input" type="text" placeholder="Find the source you need quickly" aria-label="Search data sources" />
+      <svg class="lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+      </svg>
+    </div>
+    <button class="btn-settings" type="button">
+      <i class="ti ti-settings"></i>
+      Settings
+    </button>
   </div>
 
   <!-- Most Popular -->
