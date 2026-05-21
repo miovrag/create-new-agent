@@ -29,7 +29,7 @@
       /* Card hover — deeper shadow on P3 displays */
       .card:hover,
       .card-no-kb:hover {
-        background: #fff;
+        box-shadow: var(--cg-shadow-default);
       }
     }
 
@@ -275,13 +275,19 @@
       margin-bottom: var(--cg-space-4);
     }
 
+    /* ── Search outer container ── */
+    .search-container {
+      background: var(--cg-white);
+      border-radius: var(--cg-radius-2x);
+      padding: var(--cg-space-8);
+      margin-bottom: var(--cg-space-8);
+    }
+
     /* ── Search row ── */
     .search-wrap {
       display: flex;
       align-items: center;
       gap: var(--cg-space-3);
-      margin-bottom: var(--cg-space-8);
-      max-width: 760px;
     }
 
     /* ── Search input — design system wrap-icon has-lead pattern ── */
@@ -391,7 +397,6 @@
     }
 
     .card:hover {
-      background: var(--cg-white);
       box-shadow: var(--cg-shadow-default);
     }
 
@@ -414,22 +419,22 @@
       padding: 0 var(--cg-space-2);
     }
 
-    /* Corner ribbon — Beta */
+    /* Corner ribbon — Beta (top-right, matches production) */
     .ribbon {
       position: absolute;
       top: 0; left: 0;
       overflow: hidden;
-      width: 48px; height: 48px;
+      width: 64px; height: 64px;
       pointer-events: none;
     }
 
     .ribbon::after {
       content: "Beta";
       position: absolute;
-      top: 8px; left: -14px;
-      width: 56px;
+      top: 14px; left: -18px;
+      width: 76px;
       text-align: center;
-      font: 700 8px/16px var(--cg-font-sans);
+      font: 700 10px/18px var(--cg-font-sans);
       color: #fff;
       background: var(--cg-primary);
       transform: rotate(-45deg);
@@ -452,7 +457,6 @@
     }
 
     .card-no-kb:hover {
-      background: var(--cg-white);
       box-shadow: var(--cg-shadow-default);
     }
 
@@ -529,7 +533,7 @@
 
     /* ── Title ── */
     .modal-title {
-      font: 700 var(--cg-h3-size)/var(--cg-h3-lh) var(--cg-font-sans);
+      font: 500 var(--cg-h3-size)/var(--cg-h3-lh) var(--cg-font-sans);
       color: var(--cg-fg-1);
       margin-bottom: var(--cg-space-1);
       padding-right: var(--cg-space-6);
@@ -685,6 +689,188 @@
 
     .btn-ghost:active { background: var(--cg-gray-200); }
     .btn-ghost .ti { font-size: 16px; }
+
+    /* ── Website modal ── */
+    .modal-website {
+      width: 560px;
+    }
+
+    .modal-title-xl {
+      font: 500 28px/1.2 var(--cg-font-sans);
+      color: var(--cg-fg-1);
+      padding-right: 0;
+      margin-bottom: var(--cg-space-4);
+    }
+
+    .modal-website .modal-divider {
+      margin-bottom: var(--cg-space-6);
+    }
+
+    .website-label {
+      display: block;
+      font: 400 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-body);
+      color: var(--cg-fg-2);
+      margin-bottom: var(--cg-space-3);
+    }
+
+    .website-input {
+      width: 100%;
+      box-sizing: border-box;
+      height: 52px;
+      padding: 0 var(--cg-space-4);
+      border: 1.5px solid var(--cg-gray-900);
+      border-radius: var(--cg-radius-2x);
+      background: var(--cg-white);
+      font: 400 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-body);
+      color: var(--cg-fg-1);
+      outline: none;
+      margin-bottom: var(--cg-space-6);
+      transition: border-color 120ms var(--cg-ease-standard),
+                  box-shadow   120ms var(--cg-ease-standard);
+    }
+
+    .website-input::placeholder { color: var(--cg-fg-4); }
+
+    .website-input:focus {
+      border-color: var(--cg-primary);
+      box-shadow: 0 0 0 3px rgba(115, 103, 240, 0.20);
+    }
+
+    .btn-website-create {
+      width: 100%;
+      height: 52px;
+      font-size: var(--cg-body-14-size);
+      border-radius: var(--cg-radius-2x);
+    }
+
+    .modal-title-center { text-align: center; }
+
+    .modal-wp-desc {
+      font: 400 var(--cg-body-14-size)/1.6 var(--cg-font-body);
+      color: var(--cg-fg-2);
+      margin-bottom: var(--cg-space-5);
+    }
+
+    .website-label-upper {
+      font: 600 11px/1 var(--cg-font-sans);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--cg-fg-3);
+    }
+
+    .modal-vision-desc {
+      font: 400 var(--cg-body-14-size)/1.6 var(--cg-font-body);
+      color: var(--cg-fg-2);
+      margin-bottom: var(--cg-space-4);
+    }
+
+    .modal-vision-desc a { color: var(--cg-primary); text-decoration: none; }
+    .modal-vision-desc a:hover { text-decoration: underline; }
+
+    .modal-vision-info {
+      display: flex;
+      align-items: center;
+      gap: var(--cg-space-3);
+      padding: var(--cg-space-3) var(--cg-space-4);
+      background: var(--cg-bg-muted);
+      border-radius: var(--cg-radius-2x);
+      font: 400 var(--cg-body-14-size)/1.5 var(--cg-font-body);
+      color: var(--cg-fg-2);
+    }
+
+    .modal-vision-info .ti { font-size: 18px; color: var(--cg-fg-3); flex-shrink: 0; }
+
+    .btn-modal-cta {
+      height: 52px;
+      padding: 0 var(--cg-space-8);
+      border-radius: var(--cg-radius-2x);
+      font-size: var(--cg-body-14-size);
+    }
+
+    /* ── Advanced Settings modal ── */
+    .modal-settings {
+      width: 560px;
+    }
+
+    .settings-card {
+      background: var(--cg-bg-muted);
+      border: 1px solid var(--cg-gray-200);
+      border-radius: var(--cg-radius-2x);
+      padding: var(--cg-space-6);
+      margin-top: var(--cg-space-5);
+    }
+
+    .settings-card-title {
+      font: 700 var(--cg-h4-size)/var(--cg-h4-lh) var(--cg-font-sans);
+      color: var(--cg-fg-1);
+      margin-bottom: var(--cg-space-3);
+    }
+
+    .settings-card-body {
+      font: 400 var(--cg-body-14-size)/var(--cg-body-14-lh) var(--cg-font-body);
+      color: var(--cg-fg-2);
+      margin-bottom: var(--cg-space-3);
+    }
+
+    .settings-card-body a {
+      color: var(--cg-primary);
+      text-decoration: none;
+    }
+
+    .settings-card-body a:hover { text-decoration: underline; }
+
+    .btn-enable {
+      margin-top: var(--cg-space-2);
+    }
+
+    /* ── SharePoint sub-picker modal ── */
+    .modal-sharepoint {
+      width: 720px;
+      text-align: center;
+    }
+
+    .modal-sharepoint .modal-title {
+      text-align: center;
+      padding-right: 0;
+      margin-bottom: var(--cg-space-8);
+    }
+
+    .sp-picker {
+      display: flex;
+      gap: var(--cg-space-6);
+      justify-content: center;
+    }
+
+    .sp-card {
+      flex: 1;
+      max-width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--cg-space-4);
+      padding: var(--cg-space-8) var(--cg-space-6);
+      background: var(--cg-white);
+      border: 1px solid var(--cg-gray-200);
+      border-radius: var(--cg-radius-3x);
+      box-shadow: var(--cg-shadow-card);
+      cursor: pointer;
+      transition: box-shadow 120ms cubic-bezier(.2,.7,.3,1), border-color 120ms cubic-bezier(.2,.7,.3,1);
+    }
+
+    .sp-card:hover {
+      box-shadow: var(--cg-shadow-default);
+    }
+
+    .sp-card img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .sp-card-label {
+      font: 500 var(--cg-body-16-size)/var(--cg-body-16-lh) var(--cg-font-sans);
+      color: var(--cg-fg-2);
+    }
   </style>
 </head>
 <body>
@@ -764,17 +950,19 @@
 
   <h1 class="page-title">Pick data source for your agent</h1>
 
-  <div class="search-wrap">
-    <div class="search-input-wrap">
-      <input class="search-input" type="text" placeholder="Find the source you need quickly" aria-label="Search data sources" />
-      <svg class="lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
-      </svg>
+  <div class="search-container">
+    <div class="search-wrap">
+      <div class="search-input-wrap">
+        <input class="search-input" type="text" placeholder="Find the source you need quickly" aria-label="Search data sources" />
+        <svg class="lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+        </svg>
+      </div>
+      <button class="btn-settings" type="button">
+        <i class="ti ti-settings"></i>
+        Settings
+      </button>
     </div>
-    <button class="btn-settings" type="button">
-      <i class="ti ti-settings"></i>
-      Settings
-    </button>
   </div>
 
   <!-- Most Popular -->
@@ -1114,10 +1302,10 @@
     </button>
 
     <!-- Title -->
-    <h2 class="modal-title" id="modalTitle">Start without a data source</h2>
+    <h2 class="modal-title" id="modalTitle">AI only</h2>
 
     <!-- Subtitle -->
-    <p class="modal-subtitle">Every other option on this page ingests external data first. This one skips that step — you go straight to building.</p>
+    <p class="modal-subtitle">Skip data setup. Go straight to chat.</p>
 
     <!-- What you get -->
     <ul class="modal-list">
@@ -1143,6 +1331,132 @@
     <div class="modal-error" id="modalError">
       <i class="ti ti-alert-circle"></i>
       Something went wrong. Try again.
+    </div>
+
+  </div>
+</div>
+
+<!-- ────────────────────────────────────────
+     MODAL — Website
+──────────────────────────────────────── -->
+<div class="modal-backdrop" id="websiteBackdrop">
+  <div class="modal modal-website" role="dialog" aria-modal="true" aria-labelledby="websiteTitle">
+
+    <button class="modal-close" id="btnWebsiteClose" aria-label="Close">
+      <i class="ti ti-x"></i>
+    </button>
+
+    <h2 class="modal-title modal-title-xl" id="websiteTitle">Build Using Your Website</h2>
+    <div class="modal-divider"></div>
+
+    <label class="website-label" for="websiteUrl">Enter your website's URL or sitemap to start:</label>
+    <input class="website-input" id="websiteUrl" type="url" placeholder="https://customgpt.ai/sitemap.xml" />
+
+    <button class="btn-primary btn-website-create">Create Agent</button>
+
+  </div>
+</div>
+
+<!-- ────────────────────────────────────────
+     MODAL — YouTube
+──────────────────────────────────────── -->
+<div class="modal-backdrop" id="youtubeBackdrop">
+  <div class="modal modal-website" role="dialog" aria-modal="true" aria-labelledby="youtubeTitle">
+    <button class="modal-close" id="btnYoutubeClose" aria-label="Close"><i class="ti ti-x"></i></button>
+    <h2 class="modal-title modal-title-xl" id="youtubeTitle">Chat With Your YouTube Channel</h2>
+    <div class="modal-divider"></div>
+    <label class="website-label" for="youtubeUrl">Enter URL of your YouTube channel to start:</label>
+    <input class="website-input" id="youtubeUrl" type="url" placeholder="https://www.youtube.com/@CustomGPT" />
+    <button class="btn-primary btn-website-create">Create Agent</button>
+  </div>
+</div>
+
+<!-- ────────────────────────────────────────
+     MODAL — WordPress
+──────────────────────────────────────── -->
+<div class="modal-backdrop" id="wordpressBackdrop">
+  <div class="modal modal-website modal-wordpress" role="dialog" aria-modal="true" aria-labelledby="wordpressTitle">
+    <button class="modal-close" id="btnWordpressClose" aria-label="Close"><i class="ti ti-x"></i></button>
+    <h2 class="modal-title modal-title-xl modal-title-center" id="wordpressTitle">WordPress Integration</h2>
+    <p class="modal-wp-desc">Enter your WordPress website, and we will build an agent using the detected pages.</p>
+    <label class="website-label website-label-upper" for="wordpressUrl">URL</label>
+    <input class="website-input" id="wordpressUrl" type="url" placeholder="https://my-wordpress-website.com" />
+    <div class="modal-actions" style="justify-content:center;">
+      <button class="btn-primary btn-modal-cta">Create Agent</button>
+    </div>
+  </div>
+</div>
+
+<!-- ────────────────────────────────────────
+     MODAL — Website + Images
+──────────────────────────────────────── -->
+<div class="modal-backdrop" id="websiteImagesBackdrop">
+  <div class="modal modal-website" role="dialog" aria-modal="true" aria-labelledby="websiteImagesTitle">
+    <button class="modal-close" id="btnWebsiteImagesClose" aria-label="Close"><i class="ti ti-x"></i></button>
+    <h2 class="modal-title modal-title-xl" id="websiteImagesTitle">Build Using Your Website</h2>
+    <div class="modal-divider"></div>
+    <label class="website-label" for="websiteImagesUrl">Enter your website's URL or sitemap to start:</label>
+    <input class="website-input" id="websiteImagesUrl" type="url" placeholder="https://customgpt.ai/sitemap.xml" />
+    <p class="modal-vision-desc">Sitemaps that follow the Google Image Sitemap Schema - common on ecommerce and portfolio websites - include image URLs directly, which we can process using advanced AI vision technology. <a href="#" onclick="return false;">Click here</a> to learn more.</p>
+    <div class="modal-vision-info">
+      <i class="ti ti-info-circle"></i>
+      You have used 0/100000 Vision Credits in this billing cycle.
+    </div>
+    <div class="modal-actions" style="justify-content:center; margin-top: var(--cg-space-6);">
+      <button class="btn-primary btn-modal-cta">Create Agent</button>
+    </div>
+  </div>
+</div>
+
+<!-- ────────────────────────────────────────
+     MODAL — Advanced Settings
+──────────────────────────────────────── -->
+<div class="modal-backdrop" id="settingsBackdrop">
+  <div class="modal modal-settings" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+
+    <button class="modal-close" id="btnSettingsClose" aria-label="Close">
+      <i class="ti ti-x"></i>
+    </button>
+
+    <h2 class="modal-title" id="settingsTitle">Advanced settings</h2>
+
+    <div class="settings-card">
+      <h3 class="settings-card-title">Improved Numeric Search</h3>
+      <p class="settings-card-body">This feature allows more accurate matching on part numbers and alphanumeric codes, and is ideal for Product Lookup use cases.</p>
+      <p class="settings-card-body">The trade-off is that data sources will take a bit longer to process on every upload and sync.</p>
+      <p class="settings-card-body">You can learn more in our <a href="#" onclick="return false;">user guide</a>.</p>
+      <p class="settings-card-body"><strong>Important:</strong> Your existing data won't update automatically – you will need to re-sync your sources for effects to apply.</p>
+      <button class="btn-primary btn-enable" id="btnEnable">Enable</button>
+    </div>
+
+    <div class="modal-actions" style="justify-content:flex-end; margin-top: var(--cg-space-6);">
+      <button class="btn-primary" id="btnSettingsDone">Done</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ────────────────────────────────────────
+     MODAL — SharePoint sub-picker
+──────────────────────────────────────── -->
+<div class="modal-backdrop" id="sharepointBackdrop">
+  <div class="modal modal-sharepoint" role="dialog" aria-modal="true" aria-labelledby="sharepointTitle">
+
+    <button class="modal-close" id="btnSharepointClose" aria-label="Close">
+      <i class="ti ti-x"></i>
+    </button>
+
+    <h2 class="modal-title" id="sharepointTitle">SharePoint Integration</h2>
+
+    <div class="sp-picker">
+      <div class="sp-card" id="spDocsCard">
+        <img src="assets/sharepoint.svg" alt="SharePoint Docs">
+        <span class="sp-card-label">SharePoint Docs</span>
+      </div>
+      <div class="sp-card" id="spSitesCard">
+        <img src="assets/sharepoint.svg" alt="SharePoint Sites">
+        <span class="sp-card-label">SharePoint Sites</span>
+      </div>
     </div>
 
   </div>
@@ -1194,8 +1508,90 @@
 
   card.addEventListener('click', openModal);
   btnClose.addEventListener('click', closeModal);
-backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal(); });
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+
+  // Website modal
+  const websiteBackdrop  = document.getElementById('websiteBackdrop');
+  const btnWebsiteClose  = document.getElementById('btnWebsiteClose');
+
+  function openWebsite() { websiteBackdrop.classList.add('open'); }
+  function closeWebsite() { websiteBackdrop.classList.remove('open'); }
+
+  document.querySelectorAll('.card:not(.card-no-kb)').forEach(c => {
+    if (c.querySelector('.card-label')?.textContent.trim() === 'Website') {
+      c.addEventListener('click', openWebsite);
+    }
+  });
+
+  btnWebsiteClose.addEventListener('click', closeWebsite);
+  websiteBackdrop.addEventListener('click', e => { if (e.target === websiteBackdrop) closeWebsite(); });
+
+  // YouTube modal
+  const youtubeBackdrop = document.getElementById('youtubeBackdrop');
+  function openYoutube() { youtubeBackdrop.classList.add('open'); }
+  function closeYoutube() { youtubeBackdrop.classList.remove('open'); }
+  document.querySelectorAll('.card').forEach(c => {
+    if (c.querySelector('.card-label')?.textContent.trim() === 'YouTube')
+      c.addEventListener('click', openYoutube);
+  });
+  document.getElementById('btnYoutubeClose').addEventListener('click', closeYoutube);
+  youtubeBackdrop.addEventListener('click', e => { if (e.target === youtubeBackdrop) closeYoutube(); });
+
+  // WordPress modal
+  const wordpressBackdrop = document.getElementById('wordpressBackdrop');
+  function openWordpress() { wordpressBackdrop.classList.add('open'); }
+  function closeWordpress() { wordpressBackdrop.classList.remove('open'); }
+  document.querySelectorAll('.card').forEach(c => {
+    if (c.querySelector('.card-label')?.textContent.trim() === 'WordPress')
+      c.addEventListener('click', openWordpress);
+  });
+  document.getElementById('btnWordpressClose').addEventListener('click', closeWordpress);
+  wordpressBackdrop.addEventListener('click', e => { if (e.target === wordpressBackdrop) closeWordpress(); });
+
+  // Website + Images modal
+  const websiteImagesBackdrop = document.getElementById('websiteImagesBackdrop');
+  function openWebsiteImages() { websiteImagesBackdrop.classList.add('open'); }
+  function closeWebsiteImages() { websiteImagesBackdrop.classList.remove('open'); }
+  document.querySelectorAll('.card').forEach(c => {
+    if (c.querySelector('.card-label')?.textContent.trim() === 'Website + Images')
+      c.addEventListener('click', openWebsiteImages);
+  });
+  document.getElementById('btnWebsiteImagesClose').addEventListener('click', closeWebsiteImages);
+  websiteImagesBackdrop.addEventListener('click', e => { if (e.target === websiteImagesBackdrop) closeWebsiteImages(); });
+
+  // Settings modal
+  const settingsBackdrop = document.getElementById('settingsBackdrop');
+  const btnSettings      = document.querySelector('.btn-settings');
+  const btnSettingsClose = document.getElementById('btnSettingsClose');
+  const btnSettingsDone  = document.getElementById('btnSettingsDone');
+  const btnEnable        = document.getElementById('btnEnable');
+
+  function openSettings() { settingsBackdrop.classList.add('open'); }
+  function closeSettings() { settingsBackdrop.classList.remove('open'); }
+
+  btnSettings.addEventListener('click', openSettings);
+  btnSettingsClose.addEventListener('click', closeSettings);
+  btnSettingsDone.addEventListener('click', closeSettings);
+  settingsBackdrop.addEventListener('click', e => { if (e.target === settingsBackdrop) closeSettings(); });
+
+  btnEnable.addEventListener('click', () => {
+    btnEnable.textContent = 'Enabled';
+    btnEnable.disabled = true;
+    btnEnable.style.opacity = '0.7';
+  });
+
+  // SharePoint modal
+  const sharepointBackdrop = document.getElementById('sharepointBackdrop');
+  function openSharepoint() { sharepointBackdrop.classList.add('open'); }
+  function closeSharepoint() { sharepointBackdrop.classList.remove('open'); }
+  document.querySelectorAll('.card').forEach(c => {
+    if (c.querySelector('.card-label')?.textContent.trim() === 'SharePoint')
+      c.addEventListener('click', openSharepoint);
+  });
+  document.getElementById('btnSharepointClose').addEventListener('click', closeSharepoint);
+  sharepointBackdrop.addEventListener('click', e => { if (e.target === sharepointBackdrop) closeSharepoint(); });
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeSettings(); closeWebsite(); closeYoutube(); closeWordpress(); closeWebsiteImages(); closeSharepoint(); } });
 
   btnCreate.addEventListener('click', () => {
     btnCreate.classList.add('loading');
